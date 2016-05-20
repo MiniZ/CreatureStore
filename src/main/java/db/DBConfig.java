@@ -5,15 +5,15 @@ public class DBConfig {
     private static String USERNAME = "";
     private static String PASSWORD = "";
 
-    private static String getDBName() {
+    public static String getDBName() {
         return DB_NAME;
     }
 
-    private static String getDBUsername() {
+    public static String getDBUsername() {
         return USERNAME;
     }
 
-    private static String getDBPassword() {
+    public static String getDBPassword() {
         return PASSWORD;
     }
 }

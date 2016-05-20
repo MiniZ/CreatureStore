@@ -27,3 +27,4 @@ hs_err_pid*
 *.psd
 .idea
 *.iml
+lib

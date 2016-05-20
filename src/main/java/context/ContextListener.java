@@ -1,5 +1,6 @@
 package main.java.context;
 
+import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 import main.java.db.DBConfig;
 
 import javax.naming.Context;
@@ -7,14 +8,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
 /**
  * Application Lifecycle Listener implementation class ContextListener
  *
  */
-@WebListener
+//@WebListener
 public class ContextListener implements ServletContextListener {
 	/**
 	 * Default constructor. 
@@ -25,7 +25,11 @@ public class ContextListener implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {
-		//			AbandonedConnectionCleanupThread.shutdown();
+		try {
+			AbandonedConnectionCleanupThread.shutdown();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

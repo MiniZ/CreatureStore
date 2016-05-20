@@ -29,4 +29,6 @@ hs_err_pid*
 *.iml
 lib
 out
+src/main/java/db/DBConfig.java
+web/META-INF/context.xml
 

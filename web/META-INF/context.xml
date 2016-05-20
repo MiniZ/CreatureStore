@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<Resource name="jdbc/cstore_db" auth="Container" type="javax.sql.DataSource"
+		username="root" password="your_mysql_pasword" driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/cstore_db?characterEncoding=UTF-8"
+		maxActive="24" maxIdle="4" poolPreparedStatements="true"
+		maxOpenPreparedStatements="100" />
+</Context>

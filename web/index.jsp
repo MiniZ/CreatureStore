@@ -15,7 +15,7 @@
   <h1>Users</h1>
   <%
     for (String s : result) {
-      out.print(s + "\n");
+      out.println("<p>" + s + "</p>");
     }
   %>
   </body>

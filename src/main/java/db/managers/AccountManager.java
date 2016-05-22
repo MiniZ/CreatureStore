@@ -22,11 +22,12 @@ public class AccountManager {
         List<String> result = new ArrayList<>();
         try {
             Connection con = dataSource.getConnection();
-            String query = "SELECT display_name FROM accounts";
+            String query = "SELECT display_name, first_name FROM accounts";
             PreparedStatement stmt = con.prepareStatement(query);
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 result.add(resultSet.getString("display_name"));
+                result.add(resultSet.getString("first_name"));
             }
             con.close();
         } catch (SQLException e) {

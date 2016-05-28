@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    font: normal 14px/2.0em Sans-Serif;
+}
+
+/* Logo */
+#logo {
+    margin: 0 0 0 0;
+    padding: 8px 0 0 0;
+    height: 55px;
+    width: auto;
+    float: left;
+}
+
+#logo h1 a, h1 a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+/* Header */
+#header {
+    background: #333;
+    height: 55px;
+    margin: 0 0 20px 0;
+    padding: 0 30px 0 30px;
+}
+
+#header-inner {
+
+}
+
+/* Menu */
+/*#top-nav {*/
+    /*margin: 0 0 0 0;*/
+    /*padding: 0 0 0 0;*/
+    /*height: 55px;*/
+    /*float: right;*/
+/*}*/
+
+#top-left-menu {
+    list-style-type: none;
+    float: left;
+    padding: 0 0 0 0;
+    margin: 0 0 0 40px;
+    height: 55px;
+}
+
+#top-right-menu {
+    list-style-type: none;
+    float: right;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    height: 55px;
+}
+
+#top-nav ul li {
+    margin: 0;
+    padding: 0 0 0 0px;
+    float: left;
+    height: 55px;
+}
+
+#top-nav ul li a {
+    display: block;
+    text-align: center;
+    height: 55px;
+    margin: 0;
+    padding: 15px 40px 0 0;
+    color: #999;
+    text-decoration: none;
+}
+
+#top-nav ul li.active a, #top-nav ul li a:hover {
+    color: white;
+}

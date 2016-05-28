@@ -8,14 +8,17 @@
       ServletContext sc = getServletConfig().getServletContext();
       AccountManager manager = (AccountManager) sc.getAttribute(AccountManager.ATTRIBUTE_NAME);
       List<String> result = manager.getAllAccountDisplayNames();
+      String loggedInUser = (String) session.getAttribute("display_name");
     %>
     <title>Creature Store</title>
   </head>
   <body>
   <h1>Users</h1>
   <%
-    for (String s : result) {
-      out.println("<p>" + s + "</p>");
+    if (loggedInUser != null) {
+        out.println("<h1>" + loggedInUser + "</h1>");
+    } else {
+        out.println("no user");
     }
   %>
   </body>

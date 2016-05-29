@@ -5,27 +5,43 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>title</title>
     <link rel="stylesheet" type="text/css" href="css/header.css">
+    <%
+        String loggedInUser = (String) session.getAttribute("display_name");
+    %>
 </head>
 <body>
-
+<script src="/javascript/app.js"></script>
 <header id="header">
     <div id="header-inner">
         <div id="logo">
-            <a href="#"><img src="/images/logo/only_logo_transparent.png"; ></a>
+            <a href="index.jsp"><img src="/images/logo/only_logo_transparent.png"; ></a>
         </div>
         <div id="top-nav">
             <ul id="top-left-menu">
                 <li><a href="#">Newest</a></li>
-                <li><a href="#">Following</a></li>
-                <li><a href="#">Plus</a></li>
-                <li><a href="#">Minus</a></li>
-                <li><a href="#">About</a></li>
+                <%
+                    if (loggedInUser != null) {
+                        out.print("<li><a href=\"#\">Following</a></li>");
+                        out.print("<li><a href=\"#\">+ Plus</a></li>");
+                        out.print("<li><a href=\"#\">- Minus</a></li>");
+                    }
+                %>
+                <li><a href="/about.jsp">About</a></li>
             </ul>
             <ul id="top-right-menu">
-                <li><a href="#">Sign in</a></li>
-                <li><a href="#">Sign up</a></li>
-                <li><a href="#">Sign out</a></li>
-                <li><a href="#">UserName</a></li>
+                <%
+                    if (loggedInUser != null) {
+                        out.print("<li><a href=\"#\">" + loggedInUser + "</a></li>");
+                        out.print("<li>");
+                        out.print("<form action=\"Logout\" role=\"form\" id=\"signout\">");
+                        out.print("<a href=\"#\" onclick=\'gotosignout()\'>Sign out</a>");
+                        out.print("</li>");
+                        out.print("</form>");
+                    } else {
+                        out.print("<li><a href=\"/signin.jsp\">Sign in</a></li>");
+                        out.print("<li><a href=\"/signup.jsp\">Sign up</a></li>");
+                    }
+                %>
             </ul>
         </div>
     </div>

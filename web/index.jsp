@@ -2,6 +2,7 @@
 <%@page import="java.lang.String"%>
 <%@ page import="main.java.db.managers.AccountManager" %>
 <%@ page import="java.util.List" %>
+<jsp:include page="header.jsp" />
 <html>
   <head>
     <%

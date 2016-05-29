@@ -1,6 +1,6 @@
 body {
     padding-top: 40px;
-    background-color: #eee;
+    background-color: #333;
 }
 
 .form-signin {
@@ -9,8 +9,25 @@ body {
     margin: 0 auto;
 }
 
+.form-signin-button {
+    background-color: #97D6D1;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 7px;
+}
+
 #gh_sign {
-    margin-top: 80px;
+}
+
+#gh_sign-other {
+    float: left;
 }
 
 .form-signin .form-signin-heading,.form-signin .checkbox {
@@ -35,18 +52,69 @@ body {
     z-index: 2;
 }
 
-.form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+.label-warning {
+    color : #EF6767;
 }
 
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+.label-success {
+    color : #97D6D1;
 }
 
 #header {
     margin-top: -40px !important;
+}
+
+.left {
+    width: 50%;
+    float: left;
+    border-right: 1px solid #97D6D1;
+}
+
+.right {
+    width: 50%;
+    float: right;
+}
+
+.container {
+    width: 100%;
+}
+
+.heading {
+    text-align: center;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+.fb-button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+.g-button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
 }

@@ -26,7 +26,7 @@
                         out.print("<li><a href=\"#\">- Minus</a></li>");
                     }
                 %>
-                <li><a href="/about.jsp">About</a></li>
+                <li><a href="about.jsp">About</a></li>
             </ul>
             <ul id="top-right-menu">
                 <%

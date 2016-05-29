@@ -1,3 +1,4 @@
+<%@ page import="java.net.URLEncoder" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="header.jsp" />
 <html>
@@ -16,23 +17,25 @@
     }
 %>
     <div class="container">
-        <form action="login" method="post" class="form-signin" id="gh_sign"
-              role="form">
+        <div class=heading>
             <%
                 String incorrectID = (String) request
                         .getAttribute("incorrectUsername");
                 String incorrectPass = (String) request
                         .getAttribute("incorrectPassword");
                 if (incorrectID != null || incorrectPass != null)
-                    out.print("<h2 class=\"form-signin-heading text-center\"><span class=\"label label-warning\">Please try again</span></h2>");
+                    out.print("<h1 class=\"form-signin-heading text-center\"><span class=\"label-warning\">Please try again</span></h1>");
                 else
-                    out.print("<h2 class=\"form-signin-heading text-center\"><span class=\"label label-success\">Please Sign In</span></h2>");
+                    out.print("<h1 class=\"form-signin-heading text-center\"><span class=\"label-success\">Please Sign In</span></h1>");
             %>
-            <input type="text" class="form-control" placeholder="ID" required
+        </div>
+        <form action="login" method="post" class="form-signin" id="gh_sign"
+              role="form">
+            <input type="text" class="form-control" placeholder="username" required
                    autofocus id="username" name="display_name"> <input
-                type="password" class="form-control" placeholder="Password" required
+                type="password" class="form-control" placeholder="password" required
                 id="password" name="password">
-            <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
+            <button class="form-control form-signin-button" type="submit">Login</button>
         </form>
     </div>
 </body>

@@ -13,7 +13,6 @@
     background-color: black;
     margin-bottom: -8px;
     margin-left: -8px;
-    margin-right: -8px;
 }
 
 .about-logo-text{
@@ -21,14 +20,7 @@
 	/*background-image: url("rsz_only_logo.png");*/
 }
 
-.about-header{
-	height: 60px;
-    border: 1px solid black;
-    background-color: black;
-    margin-top: -8px;
-    margin-left: -8px;
-    margin-right: -8px;
-}
+
 
 .about-logo img{
 	margin-left:auto;

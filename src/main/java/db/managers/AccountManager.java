@@ -1,5 +1,7 @@
 package main.java.db.managers;
 
+import main.java.models.Account;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -68,6 +70,10 @@ public class AccountManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
+    }
+
+    public boolean createAccount(Account account) {
         return false;
     }
 }

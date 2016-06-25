@@ -21,9 +21,9 @@
                 <li><a href="#">Newest</a></li>
                 <%
                     if (loggedInUser != null) {
-                        out.print("<li><a href=\"#\">Following</a></li>");
-                        out.print("<li><a href=\"#\">+ Plus</a></li>");
-                        out.print("<li><a href=\"#\">- Minus</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-15\"><a href=\"#\">Following</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-15\"><a href=\"#\">+ Plus</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-15\"><a href=\"#\">- Minus</a></li>");
                     }
                 %>
                 <li><a href="about.jsp">About</a></li>
@@ -31,15 +31,15 @@
             <ul id="top-right-menu">
                 <%
                     if (loggedInUser != null) {
-                        out.print("<li><a href=\"#\">" + loggedInUser + "</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-15\"><a href=\"#\">" + loggedInUser + "</a></li>");
                         out.print("<li>");
                         out.print("<form action=\"Logout\" role=\"form\" id=\"signout\">");
                         out.print("<a href=\"#\" onclick=\'gotosignout()\'>Sign out</a>");
                         out.print("</li>");
                         out.print("</form>");
                     } else {
-                        out.print("<li><a href=\"/signin.jsp\">Sign in</a></li>");
-                        out.print("<li><a href=\"/signup.jsp\">Sign up</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-15\"><a href=\"/signin.jsp\">Sign in</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-15\"><a href=\"/signup.jsp\">Sign up</a></li>");
                     }
                 %>
             </ul>

@@ -19,6 +19,8 @@
     }
 %>
 <div class="container">
+    <form action="SignUp" method="post" class="form-horizontal form-signin" id="gh_sign" role="form"
+          accept-charset="UTF-8">
         <div class=heading>
             <%
                 String usernameTaken = (String) request
@@ -32,8 +34,6 @@
                     out.print("<h2 class=\"form-signin-heading text-center\"><span class=\"label-success ff-superSquareCap fc-grey fs-30\">Sign Up Here</span></h2>");
             %>
         </div>
-    <form action="SignUp" method="post"class="form-horizontal form-signin" id="gh_sign" role="form"
-          accept-charset="UTF-8">
         <div class="form-group">
             <label for="inputName3" class="field-label ff-superSquareCap fc-grey fs-18">Display Name:</label>
             <div class="label-field">
@@ -101,13 +101,6 @@
             <div class="label-field">
                 <input type="text" class="form-control" placeholder="city"
                        required id="city" name="city">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="aboutMe3" class="field-label ff-superSquareCap fc-grey fs-18">About Me :</label>
-            <div class="label-field">
-                <input type="text" class="form-control" placeholder="about me"
-                       required id="about_me" name="about_me">
             </div>
         </div>
         <div class="form-group">

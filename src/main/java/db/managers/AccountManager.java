@@ -85,9 +85,9 @@ public class AccountManager {
                 try (PreparedStatement stmt = conn.prepareStatement("insert into accounts"
                         + "(first_name, last_name, hashed_password, "
                         + "email, display_name, img_src, fb_link, twitter_link, google_plus_link, "
-                        + "country, city,  about_me, type, is_admin, is_banned) "
+                        + "country, city,  about_me, type, is_banned) "
                         + "values "
-                        + "( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                        + "( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
                 )){
                     stmt.setString(1, acc.getFirstName());
                     stmt.setString(2, acc.getLastName());
@@ -109,18 +109,12 @@ public class AccountManager {
                             stmt.setString(13, "USER");
                             break;
                     }
-                    if(acc.isAdmin()){
+
+                    if(acc.isBanned()){
                         stmt.setString(14, "1");
                     }
                     else {
                         stmt.setString(14, "0");
-                    }
-
-                    if(acc.isBanned()){
-                        stmt.setString(15, "1");
-                    }
-                    else {
-                        stmt.setString(15, "0");
                     }
                     stmt.executeUpdate();
                     flag = true;

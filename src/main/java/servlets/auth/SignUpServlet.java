@@ -52,7 +52,7 @@ public class SignUpServlet extends HttpServlet {
 
         // getting username either from social login or the web-page form
         String display_name = null;
-        display_name = (String) request.getAttribute("display_name");
+        display_name = request.getParameter("display_name");
         if (!manager.userExists(display_name)) {
             Account account = getAccount(display_name, request);
             if (manager.createAccount(account)) {
@@ -82,19 +82,19 @@ public class SignUpServlet extends HttpServlet {
         Account account = new Account();
         account.setDisplayName(display_name);
         try {
-            account.setHashedPassword(PasswordHash.hashText((String) request.getAttribute("password")));
+            account.setHashedPassword(PasswordHash.hashText((String) request.getParameter("password")));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        account.setFirstName((String) request.getAttribute("first_name"));
-        account.setLastName((String) request.getAttribute("last_name"));
-        account.setMail((String) request.getAttribute("email"));
-        account.setFbLink((String) request.getAttribute("facebook_link"));
-        account.setTwitterLink((String) request.getAttribute("twitter_link"));
-        account.setGoogleLink((String) request.getAttribute("google_plus_link"));
-        account.setCountry((String) request.getAttribute("country"));
-        account.setCity((String) request.getAttribute("city"));
-        account.setAboutMe((String) request.getAttribute("about_me"));
+        account.setFirstName(request.getParameter("first_name"));
+        account.setLastName(request.getParameter("last_name"));
+        account.setMail(request.getParameter("email"));
+        account.setFbLink(request.getParameter("facebook_link"));
+        account.setTwitterLink(request.getParameter("twitter_link"));
+        account.setGoogleLink(request.getParameter("google_plus_link"));
+        account.setCountry(request.getParameter("country"));
+        account.setCity(request.getParameter("city"));
+        account.setAboutMe(request.getParameter("about_me"));
         account.setType(AccountType.USER);
         account.setIsBanned(false);
         return account;

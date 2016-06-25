@@ -11,6 +11,7 @@
 </head>
 <body>
 <script src="/javascript/app.js"></script>
+<script src="/javascript/jquery-2.1.1.min.js"></script>
 <header id="header">
     <div id="header-inner">
         <div id="logo">

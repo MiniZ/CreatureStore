@@ -30,6 +30,8 @@ public class Account {
 
     private AccountType type;
 
+    private boolean isAdmin;
+
     private boolean isBanned;
 
     public Account() {
@@ -156,6 +158,14 @@ public class Account {
         this.isBanned = isBanned;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -173,6 +183,7 @@ public class Account {
                 ", city='" + city + '\'' +
                 ", aboutMe='" + aboutMe + '\'' +
                 ", type=" + type +
+                ", isAdmin=" + isAdmin +
                 ", isBanned=" + isBanned +
                 '}';
     }

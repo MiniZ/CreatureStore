@@ -73,7 +73,66 @@ public class AccountManager {
         return false;
     }
 
-    public boolean createAccount(Account account) {
-        return false;
+    public boolean createAccount(Account acc) {
+
+        boolean flag = false;
+
+        if(userExists(acc.getDisplayName())){
+            return false;
+        }
+        else{
+            try (Connection conn = dataSource.getConnection()){
+                try (PreparedStatement stmt = conn.prepareStatement("insert into accounts"
+                        + "(first_name, last_name, hashed_password, "
+                        + "email, display_name, img_src, fb_link, twitter_link, google_plus_link, "
+                        + "country, city,  about_me, type, is_admin, is_banned) "
+                        + "values "
+                        + "( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                )){
+                    stmt.setString(1, acc.getFirstName());
+                    stmt.setString(2, acc.getLastName());
+                    stmt.setString(3, acc.getHashedPassword());
+                    stmt.setString(4, acc.getMail());
+                    stmt.setString(5, acc.getDisplayName());
+                    stmt.setString(6, acc.getImgSrc());
+                    stmt.setString(7, acc.getFbLink());
+                    stmt.setString(8, acc.getTwitterLink());
+                    stmt.setString(9, acc.getGoogleLink());
+                    stmt.setString(10, acc.getCountry());
+                    stmt.setString(11, acc.getCity());
+                    stmt.setString(12, acc.getAboutMe());
+                    switch (acc.getType()) {
+                        case ADMIN:
+                            stmt.setString(13, "ADMIN");
+                            break;
+                        case USER:
+                            stmt.setString(13, "USER");
+                            break;
+                    }
+                    if(acc.isAdmin()){
+                        stmt.setString(14, "1");
+                    }
+                    else {
+                        stmt.setString(14, "0");
+                    }
+
+                    if(acc.isBanned()){
+                        stmt.setString(15, "1");
+                    }
+                    else {
+                        stmt.setString(15, "0");
+                    }
+                    stmt.executeUpdate();
+                    flag = true;
+                    conn.close();
+                    return flag;
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return flag;
     }
 }

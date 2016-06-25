@@ -88,7 +88,7 @@ public class SignUpServlet extends HttpServlet {
         }
         account.setFirstName((String) request.getAttribute("first_name"));
         account.setLastName((String) request.getAttribute("last_name"));
-        account.setMail((String) request.getAttribute("mail"));
+        account.setMail((String) request.getAttribute("email"));
         account.setFbLink((String) request.getAttribute("facebook_link"));
         account.setTwitterLink((String) request.getAttribute("twitter_link"));
         account.setGoogleLink((String) request.getAttribute("google_plus_link"));

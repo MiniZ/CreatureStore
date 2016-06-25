@@ -11,6 +11,7 @@
 </head>
 <body>
 <script src="/javascript/countries.js"></script>
+<script src="/javascript/jquery-2.1.1.js"></script>
 <%
     if (loggedInUser != null) {
         response.sendRedirect("index.jsp");
@@ -108,6 +109,17 @@
                 <input type="text" class="form-control" placeholder="about me"
                        required id="about_me" name="about_me">
             </div>
+        </div>
+        <div class="form-group">
+            <label for="aboutMe3" class="field-label">About Me :</label>
+            <div class="label-field">
+                <input type="text" class="form-control" placeholder="about me"
+                       required id="about_me" name="about_me">
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="form-control form-signin-button" type="submit">Sign
+                Up</button>
         </div>
     </form>
 </div>

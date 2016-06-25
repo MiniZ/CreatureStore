@@ -84,6 +84,8 @@
     </div>
 </div>
 <div class="footer">
-
+    <div class="ltd">
+        Creature Store © 2016
+    </div>
 </div>
 </body>

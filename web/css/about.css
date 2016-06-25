@@ -1,10 +1,13 @@
 .body{
 	margin: 0 !important;
     padding: 0 !important;
-    background-image: url("rsz_only_logo.png");
+}
 
-    
-	/*background: url("only_logo_transparent.png");*/
+.ltd{
+	color: grey;
+	text-align: center;
+	/* vertical-align: middle; */
+	padding-top: 17px;
 }
 
 .footer{
@@ -14,12 +17,6 @@
     margin-bottom: -8px;
     margin-left: -8px;
 }
-
-.about-logo-text{
-
-	/*background-image: url("rsz_only_logo.png");*/
-}
-
 
 
 .about-logo img{

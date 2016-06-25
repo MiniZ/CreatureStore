@@ -24,9 +24,9 @@
                 String incorrectPass = (String) request
                         .getAttribute("incorrectPassword");
                 if (incorrectID != null || incorrectPass != null)
-                    out.print("<h1 class=\"form-signin-heading text-center\"><span class=\"label-warning\">Please try again</span></h1>");
+                    out.print("<h1 class=\"form-signin-heading text-center\"><span class=\"label-warning ff-superSquareCap fc-grey fs-30\">Please try again</span></h1>");
                 else
-                    out.print("<h1 class=\"form-signin-heading text-center\"><span class=\"label-success\">Please Sign In</span></h1>");
+                    out.print("<h1 class=\"form-signin-heading text-center\"><span class=\"label-success ff-superSquareCap fc-grey fs-30\">Please Sign In</span></h1>");
             %>
         </div>
         <form action="login" method="post" class="form-signin" id="gh_sign"

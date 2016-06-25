@@ -19,7 +19,6 @@
         About
     </title>
     <link type="text/css" rel="stylesheet" href="css/about.css"/>
-    <link type="text/css" rel="stylesheet" href="css/styles.css"/>
     <!-- <link type="text/css" rel="stylesheet" href="./css/reset.css"/>
     <link type="text/css" rel="stylesheet" href="./css/global.css" />
     <script src="./js/jquery-1.12.1.min.js"></script>

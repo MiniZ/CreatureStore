@@ -28,7 +28,9 @@
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"#\">- Minus</a></li>");
                     }
                 %>
-                <li class="ff-superSquareCap fc-grey fs-13"><a href="about.jsp">About</a></li>
+
+                <li class="ff-superSquareCap fc-grey fs-13"><a href="About.jsp">About</a></li>
+
             </ul>
             <ul id="top-right-menu">
                 <%

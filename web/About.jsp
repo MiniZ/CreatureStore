@@ -19,6 +19,7 @@
         About
     </title>
     <link type="text/css" rel="stylesheet" href="css/about.css"/>
+    <link type="text/css" rel="stylesheet" href="css/styles.css"/>
     <!-- <link type="text/css" rel="stylesheet" href="./css/reset.css"/>
     <link type="text/css" rel="stylesheet" href="./css/global.css" />
     <script src="./js/jquery-1.12.1.min.js"></script>
@@ -31,7 +32,7 @@
         <img src="images/logo/logo_transparent.png">
     </div>
 
-    <div class="about-text f-28 m-auto">
+    <div class="about-text f-28 m-auto ff-superSquareCap fs-40 fc-black">
         <p>A website giving you opportunity to share your creative art</p>
         <p>Dribbble is the single most important social network for anyone that cares about design. It's done more to help us build our team and brand than Facebook, Twitter and Instagram combined.</p>
     </div>
@@ -84,7 +85,7 @@
     </div>
 </div>
 <div class="footer">
-    <div class="ltd">
+    <div class="ltd ff-superSquareCap fs-13 fc-grey">
         Creature Store © 2016
     </div>
 </div>

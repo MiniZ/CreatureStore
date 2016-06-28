@@ -114,6 +114,18 @@
             <button class="form-control form-signin-button" type="submit">Sign
                 Up</button>
         </div>
+        <div class="form-group">
+            <%
+                String AppID = "836294589795940";
+                String redirectURL = "http://localhost:8080/FacebookSignUp";
+                String fbURL = "http://www.facebook.com/dialog/oauth?client_id="
+                        + AppID + "&redirect_uri="
+                        + URLEncoder.encode(redirectURL, "UTF-8")
+                        + "&scope=public_profile,email";
+            %>
+            <a href="<%=fbURL%>"
+               class="form-control form-signin-button fb-icon">Facebook Sign Up</a>
+        </div>
     </form>
 </div>
 </body>

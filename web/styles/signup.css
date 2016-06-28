@@ -131,3 +131,7 @@ input[type=password], select {
     border: 1px solid #97D6D1;
     box-sizing: border-box;
 }
+
+.fb-icon {
+    background-color: #3B5998;
+}

@@ -1,0 +1,125 @@
+ .about-header{
+ 	height: 77px;
+    background-color: black;
+    width: 100%;
+    margin: -8px;
+    margin-right: -23x;
+    padding-right: 16px;
+}
+
+.post-photo{
+	max-width: 100%;
+}
+
+
+.bg-post-image{
+	background-image: url("../images/images/post.jpg");
+}
+
+.bg-minus-icon{
+    width: 16px;
+    height: 16px;
+	background-image: url("../images/images/minus.png");
+    margin-right: 6px;
+}
+
+.bg-plus-icon{
+    width: 16px;
+    height: 16px;
+	background-image: url("../images/images/plus.png");
+    margin-right: 15px;
+}
+
+.post-photo{
+    width: 250px;
+    height: 250px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    border-top: 17px solid white;
+}
+
+.bg-cover{
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.post{
+    background: white;
+    width: 21%;
+    padding-bottom: 20px;
+}
+
+
+.on-hover:hover{
+    opacity: 0.7;
+}
+
+.bg-avatar{
+    background-image: url("../images/images/rsz_anano.jpg");
+}
+
+.author-avatar{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 6px;
+    
+}
+
+.post-author{
+    margin-top: 7px;
+    width: 12%;
+}
+
+
+a.tooltips {
+  position: relative;
+  display: inline;
+}
+a.tooltips span {
+  position: absolute;
+  width:50px;
+  color: #fff;
+  background: #B3B3B3;
+  height: 33px;
+  line-height: 33px;
+  text-align: center;
+  visibility: hidden;
+  border-radius: 5px;
+}
+a.tooltips span:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  width: 0; height: 0;
+  border-top: 8px solid #B3B3B3;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+a:hover.tooltips span {
+  visibility: visible;
+  opacity: 1;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -33px;
+  z-index: 999;
+}
+
+
+
+.hover-title{
+    display: none;
+}
+
+.post-photo:hover .hover-title{
+    background-color: white;
+    display: block;
+    width: 250px;
+    height: 250px;
+    opacity: 0.7;
+}
+

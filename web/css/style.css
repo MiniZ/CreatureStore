@@ -102,6 +102,10 @@
 	color: rgb(144, 144, 144);
 }
 
+.fc-grey-darker{
+    color: rgb(100, 100, 100);
+}
+
 
 
 .body{
@@ -138,5 +142,14 @@
 	position: fixed;
 }
 
+.right{
+    float: right;
+}
 
+.left{
+    float: left;
+}
 
+.pointer{
+    cursor: pointer;
+}

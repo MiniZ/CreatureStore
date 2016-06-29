@@ -11,6 +11,10 @@
 	max-width: 100%;
 }
 
+.post-dashboard{
+    max-width: 1350px;
+
+}
 
 .bg-post-image{
 	background-image: url("../images/images/post.jpg");
@@ -44,10 +48,16 @@
     background-repeat: no-repeat;
 }
 
-.post{
+.post-upper{
     background: white;
-    width: 21%;
     padding-bottom: 20px;
+/*    width: 21%;*/
+}
+
+.post{
+    display: inline-block;
+    margin: 2%;
+    width: 280px;
 }
 
 
@@ -70,7 +80,7 @@
 
 .post-author{
     margin-top: 7px;
-    width: 12%;
+    width: 70%;
 }
 
 
@@ -121,5 +131,36 @@ a:hover.tooltips span {
     width: 250px;
     height: 250px;
     opacity: 0.7;
+}
+
+
+@media screen and (max-width: 1450px) {
+    .post-dashboard{
+        max-width: 1000px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .post-dashboard{
+        max-width: 620px;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .post-dashboard{
+        max-width: 630px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .post-dashboard{
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .post-dashboard{
+        max-width: 300px;
+    }
 }
 

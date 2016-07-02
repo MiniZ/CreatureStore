@@ -169,4 +169,12 @@ public class AccountManager {
                 isAdmin, isBanned);
         return acc1;
     }
+
+    public Account getImgSrcByDisplayName(String display_name) {
+        return null;
+    }
+
+    public void updateUSerImgSrc(String imgSrc, String display_name) {
+
+    }
 }

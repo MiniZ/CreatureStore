@@ -1,5 +1,7 @@
 package main.java.db.managers;
 
+import main.java.models.Post;
+
 import javax.sql.DataSource;
 
 public class PostManager {
@@ -10,5 +12,9 @@ public class PostManager {
 
     public PostManager(DataSource dataSource) {
         this.dataSource = dataSource;
+    }
+
+    public Post getPostImgSrcById(String post_id) {
+        return null;
     }
 }

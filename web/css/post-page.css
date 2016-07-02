@@ -1,0 +1,92 @@
+.post-page{
+	margin-top: 100px;
+    margin-left: 15%;
+}
+
+
+.post-photo{
+	border: 20px solid white;
+    margin-top: 30px;
+}
+
+.post-photo img{
+	max-width: 400px;
+    max-height: 300px;
+    display: block;	
+}
+
+ .about-header{
+ 	height: 77px;
+    background-color: black;
+    width: 100%;
+    margin: -8px;
+    margin-right: -23x;
+    padding-right: 16px;
+}
+
+.post-author{
+    margin-top: 7px;
+    width: 70%;
+}
+
+.author-avatar{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-left: 3%;
+    margin-right: 4%;
+ 
+}
+
+.bg-avatar{
+    background-image: url("../images/images/rsz_anano.jpg");
+}
+
+.author-name{
+	padding-top: 2px;
+}
+
+.post-title{
+	display: inline;
+}
+
+.inline-block{
+	display: inline-block;
+}
+
+.right-content{
+	top: 250px;
+    position: absolute;
+    margin-left: 50px;
+}
+
+.plus-minus-num{
+	margin-right: 16px;
+	display: inline-block;
+}
+
+.post-description{
+	margin-top: 20px;
+	width: 50%;
+}
+
+.post-date{
+	margin-top: 20px;
+	width: 50%;
+}
+
+.post-pluses{
+	margin-bottom: 20px;
+}
+
+.post-tag{
+	background-color: rgb(212, 212, 212);
+	margin-right: 10px;
+    border-radius: 15%;
+    padding: 3px;
+    text-align: center;
+}
+
+.post-tags{
+	margin-top: 20px;
+}

@@ -1,0 +1,12 @@
+
+@media screen and (max-width: 1450px) {
+    .post-dashboard{
+        max-width: 1000px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .post-dashboard{
+        max-width: 620px;
+    }
+}

@@ -20,19 +20,6 @@
 	background-image: url("../images/images/post.jpg");
 }
 
-.bg-minus-icon{
-    width: 16px;
-    height: 16px;
-	background-image: url("../images/images/minus.png");
-    margin-right: 6px;
-}
-
-.bg-plus-icon{
-    width: 16px;
-    height: 16px;
-	background-image: url("../images/images/plus.png");
-    margin-right: 15px;
-}
 
 .post-photo{
     width: 250px;
@@ -42,11 +29,7 @@
     border-top: 17px solid white;
 }
 
-.bg-cover{
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
+
 
 .post-upper{
     background: white;
@@ -61,9 +44,7 @@
 }
 
 
-.on-hover:hover{
-    opacity: 0.7;
-}
+
 
 .bg-avatar{
     background-image: url("../images/images/rsz_anano.jpg");
@@ -134,33 +115,6 @@ a:hover.tooltips span {
 }
 
 
-@media screen and (max-width: 1450px) {
-    .post-dashboard{
-        max-width: 1000px;
-    }
-}
 
-@media screen and (max-width: 1200px) {
-    .post-dashboard{
-        max-width: 620px;
-    }
-}
 
-@media screen and (max-width: 960px) {
-    .post-dashboard{
-        max-width: 630px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .post-dashboard{
-        max-width: 300px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .post-dashboard{
-        max-width: 300px;
-    }
-}
 

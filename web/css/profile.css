@@ -1,0 +1,107 @@
+.profile {
+    height: 270px;
+    padding: 0 30px 0 30px;
+    margin: 0 0 20px 0;
+    border-bottom-style: solid;
+    border-bottom-color: grey;
+}
+
+.pic_with_menu {
+    width: 222px;
+    height: 100%;
+    display: inline-block;
+    float: left;
+    /*margin: 0 30px 0 0;*/
+    /*border: solid;*/
+}
+
+.profile-picture {
+    width: 222px;
+    height: 222px;
+    display: block;
+    /*float: left;*/
+    margin: 0 30px 10px 0;
+    border: solid;
+}
+
+.profile-info {
+    width: 20%;
+    height: 100%;
+    display: inline-block;
+    padding: 0 30px 0 30px;
+    margin: 0 30px 0 30px;
+    float: left;
+    /*border: solid;*/
+}
+
+.profile-about {
+    width: 40%;
+    height: 90%;
+    display: inline-block;
+    padding: 0 30px 0 30px;
+    margin: 0 30px 0 30px;
+    float: left;
+    border-left-style: solid;
+    border-left-color: grey;
+}
+
+.followers_menu {
+    display: block;
+    margin: 0 0 0 5px;
+}
+
+.followers_menu ul {
+    list-style: none;
+    background-color: #333;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.followers_menu li {
+    /*font-family: 'Oswald', sans-serif;*/
+    /*font-size: 1.2em;*/
+    /*line-height: 40px;*/
+    height: 30px;
+    /*border-bottom: 1px solid #888;*/
+}
+
+.followers_menu a {
+    text-decoration: none;
+    color: #999;
+    display: block;
+    transition: .3s background-color;
+}
+
+.followers_menu a:hover {
+    /*background-color: #005f5f;*/
+    color: white;
+}
+
+.followers_menu a.active {
+    background-color: #fff;
+    color: #444;
+    cursor: default;
+}
+
+/* Option 1 - Display Inline */
+.followers_menu li {
+    display: inline-block;
+    /*margin-right: -4px;*/
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+/* Options 2 - Float
+.followers_menu li {
+  float: left;
+}
+.followers_menu ul {
+  overflow: auto;
+  width: 600px;
+  margin: 0 auto;
+}
+.followers_menu {
+  background-color: #444;
+}
+    */

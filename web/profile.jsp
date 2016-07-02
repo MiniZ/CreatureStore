@@ -44,8 +44,17 @@
 
 
 <div class="profile">
+    <div class="pic_with_menu">
     <div class="profile-picture">
         <img src="/images/logo/only_logo_transparent.png" alt="no pic">
+    </div>
+    <div class="followers_menu">
+        <ul>
+            <li class="followers"><a href="#">followers</a></li>
+            <li class="following"><a href="#">following</a></li>
+
+        </ul>
+    </div>
     </div>
     <div class="profile-info">
         <div class="display-name">

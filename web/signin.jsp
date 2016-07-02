@@ -32,7 +32,8 @@
         <form action="login" method="post" class="form-signin" id="gh_sign"
               role="form">
             <input type="text" class="form-control" placeholder="username" required
-                   autofocus id="username" name="display_name"> <input
+                   autofocus id="username" name="display_name">
+            <input
                 type="password" class="form-control" placeholder="password" required
                 id="password" name="password">
             <button class="form-control form-signin-button" type="submit">Login</button>

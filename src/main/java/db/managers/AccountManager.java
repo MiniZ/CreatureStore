@@ -170,11 +170,36 @@ public class AccountManager {
         return acc1;
     }
 
-    public Account getImgSrcByDisplayName(String display_name) {
-        return null;
+    public String getImgSrcByDisplayName(String display_name) {
+        String result = null;
+        try {
+            Connection con = dataSource.getConnection();
+            String query = "SELECT img_src FROM accounts WHERE display_name = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, display_name);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                result = resultSet.getString("img_src");
+            }
+            con.close();
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public void updateUSerImgSrc(String imgSrc, String display_name) {
-
+        try (Connection conn = dataSource.getConnection()){
+            try (PreparedStatement stmt = conn.prepareStatement("update accounts "
+                    + "set img_src = ? where display_name = ?")){
+                stmt.setString(1, imgSrc);
+                stmt.setString(2, display_name);
+                stmt.executeUpdate();
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

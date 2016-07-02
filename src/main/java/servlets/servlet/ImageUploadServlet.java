@@ -1,16 +1,12 @@
 package main.java.servlets.servlet;
 
 import main.java.db.managers.AccountManager;
-import main.java.db.managers.PostManager;
-import main.java.models.Account;
-import main.java.models.Post;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -24,9 +20,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.UUID;
 
-@WebServlet("/AvatarUpload")
+@WebServlet("/ImageUploadServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 10, // 10MB
         maxRequestSize = 1024 * 1024 * 50)
@@ -35,6 +30,13 @@ public class ImageUploadServlet extends StorageServlet {
     private static final String UPLOAD_LOCATION_PROPERTY_KEY = "storage.location";
     private String uploadsDirName;
     private static final String POST_SAVE_DIR = "posts";
+
+
+    private boolean isMultipart;
+    private String filePath;
+    private int maxFileSize = 50 * 1024 * 1024;
+    private int maxMemSize = 4 * 1024 *1024;
+    private File file ;
     private static final String AVATAR_SAVE_DIR = "avatars";
 
     @Override
@@ -58,101 +60,59 @@ public class ImageUploadServlet extends StorageServlet {
      */
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-        AccountManager manager = (AccountManager) getServletContext()
-                .getAttribute(AccountManager.ATTRIBUTE_NAME);
+        isMultipart = ServletFileUpload.isMultipartContent(request);
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        factory.setSizeThreshold(maxMemSize);
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        upload.setSizeMax( maxFileSize );
 
-        PostManager postManager = (PostManager) getServletContext()
-                .getAttribute(PostManager.ATTRIBUTE_NAME);
+        try{
+            // Parse the request to get file items.
+            List fileItems = upload.parseRequest(request);
+            // Process the uploaded file items
+            for (Object fileItem : fileItems) {
+                FileItem item = (FileItem) fileItem;
+                if (!item.isFormField()) {
+                    AccountManager manager = (AccountManager) getServletContext()
+                            .getAttribute(AccountManager.ATTRIBUTE_NAME);
 
-        String type = request.getParameter("type");
-        String fileName = request.getParameter("name");
-
-        switch (type) {
-            case "avatar" :
-                String display_name = (String) request.getSession()
-                        .getAttribute("dispay_name");
-                if (display_name == null) {
-                    response.sendRedirect("index.jsp");
-                    return;
-                }
-                Account acc = manager.getImgSrcByDisplayName(display_name);
-                // constructs path of the directory to save uploaded file
-                String savePath = uploadsDirName + File.separator + AVATAR_SAVE_DIR;
-                if (acc.getImgSrc() != null || !acc.getImgSrc().equals("")) {
-                    File fileStd = new File(savePath + File.separator + AVATAR_SAVE_DIR
-                            + File.separator + acc.getImgSrc());
-                    fileStd.delete();
-                }
-                FileItemFactory factory = new DiskFileItemFactory();
-                ServletFileUpload upload = new ServletFileUpload(factory);
-                List items = null;
-                try {
-                    items = upload.parseRequest(request);
-                } catch (FileUploadException ignored) {}
-                FileItem item = null;
-                if (items != null) {
-                    item = (FileItem) items.get(0);
-                }
-                File file = new File(savePath);
-                if (!file.exists()) {
-                    //noinspection ResultOfMethodCallIgnored
-                    file.mkdirs();
-                }
-                byte[] data = new byte[0];
-                if (item != null) {
+                    String display_name = (String) request.getSession().getAttribute("display_name");
+                    if (display_name == null) {
+                        response.sendRedirect("index.jsp");
+                        return;
+                    }
+                    String imgsrc = manager.getImgSrcByDisplayName(display_name);
+                    // constructs path of the directory to save uploaded file
+                    String savePath = uploadsDirName + File.separator + AVATAR_SAVE_DIR;
+                    if (imgsrc != null) {
+                        File fileStd = new File(savePath + File.separator + AVATAR_SAVE_DIR
+                                + File.separator + imgsrc);
+                        //noinspection ResultOfMethodCallIgnored
+                        fileStd.delete();
+                    }
+                    File file = new File(savePath);
+                    if (!file.exists()) {
+                        //noinspection ResultOfMethodCallIgnored
+                        file.mkdirs();
+                    }
+                    byte[] data = new byte[0];
+                    String filename = "";
                     data = IOUtils.toByteArray(item.getInputStream());
+                    filename = item.getName();
+                    Path path = Paths.get(savePath + File.separator + filename);
+                    Files.write(path, data);
+                    manager.updateUSerImgSrc(savePath + File.separator + filename, display_name);
+                    //refresh user page
+                    RequestDispatcher dispatcher = request
+                            .getRequestDispatcher("profile.jsp?username=" + display_name);
+                    dispatcher.forward(request, response);
                 }
-                String id = UUID.randomUUID().toString();
-                String result = id.length() + "_" + id + fileName;
-                Path path = Paths.get(savePath + File.separator + result);
-                Files.write(path, data);
-                manager.updateUSerImgSrc(savePath + File.separator + result, display_name);
-                //refresh user page
-                break;
-            case "post" :
-                String display_name_1 = (String) request.getSession()
-                        .getAttribute("dispay_name");
-                String post_id = (String) request.getSession()
-                        .getAttribute("post_id");
-                if (display_name_1 == null) {
-                    response.sendRedirect("index.jsp");
-                    return;
-                }
-                Post post = postManager.getPostImgSrcById(post_id);
-                // constructs path of the directory to save uploaded file
-                String savePath1 = uploadsDirName + File.separator + POST_SAVE_DIR;
-                if (post.getImgSrc() != null || !post.getImgSrc().equals("")) {
-                    File fileStd = new File(savePath1 + File.separator + POST_SAVE_DIR
-                            + File.separator + post.getImgSrc());
-                    fileStd.delete();
-                }
-                FileItemFactory factory1 = new DiskFileItemFactory();
-                ServletFileUpload upload1 = new ServletFileUpload(factory1);
-                List items1 = null;
-                try {
-                    items1 = upload1.parseRequest(request);
-                } catch (FileUploadException ignored) {}
-                FileItem item1 = null;
-                if (items1 != null) {
-                    item1 = (FileItem) items1.get(0);
-                }
-                File file1 = new File(savePath1);
-                if (!file1.exists()) {
-                    //noinspection ResultOfMethodCallIgnored
-                    file1.mkdirs();
-                }
-                byte[] data1 = new byte[0];
-                if (item1 != null) {
-                    data = IOUtils.toByteArray(item1.getInputStream());
-                }
-                String id1 = UUID.randomUUID().toString();
-                String result1 = id1.length() + "_" + id1 + fileName;
-                Path path1 = Paths.get(savePath1 + File.separator + result1);
-                Files.write(path1, data1);
-//                pos.updateUSerImgSrc(savePath1 + File.separator + result1, display_name1);
-                break;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
+
 
     /*
      * Extracts file's extensions from given filename.

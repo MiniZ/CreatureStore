@@ -30,7 +30,7 @@
         String googlePlus = profileAcc.getGoogleLink();
         String city = profileAcc.getCity();
         String country = profileAcc.getCountry();
-        String imgSource = "test";
+        String imgSource = profileAcc.getImgSrc();
         String aboutMe = profileAcc.getAboutMe();
         String profileImg = profileAcc.getImgSrc();
 %>
@@ -39,8 +39,15 @@
 <div class="profile">
     <div class="pic_with_menu">
     <div class="profile-picture">
-        <img src="/images/logo/only_logo_transparent.png" alt="no pic">
+        <img src="<%=imgSource%>" alt="no pic">
     </div>
+        <div class="upload-avatar">
+            <form action="ImageUploadServlet" method="post"
+                  enctype="multipart/form-data">
+                <input type="file" name="file" size="50" />
+                <input type="submit" value="Upload File" />
+            </form>
+        </div>
     <div class="followers_menu">
         <ul>
             <li class="followers"><a href="#">followers</a></li>

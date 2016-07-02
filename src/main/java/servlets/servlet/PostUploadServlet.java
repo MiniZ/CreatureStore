@@ -7,8 +7,6 @@ import java.io.IOException;
 
 public class PostUploadServlet extends StorageServlet {
 
-
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);

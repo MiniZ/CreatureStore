@@ -1,0 +1,141 @@
+body {
+    padding-top: 40px;
+    background-color: #333;
+}
+
+.form-signin {
+    max-width: 600px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.field-label {
+    float: left;
+    width: 200px;
+    padding-top: 14px;
+    font-size: 20px;
+    color: #97D6D1;
+}
+
+.label-field {
+    float: left;
+    width: 400px;
+}
+
+.form-signin-button {
+    background-color: #97D6D1;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 7px;
+}
+
+#gh_sign {
+}
+
+#gh_sign-other {
+    float: left;
+}
+
+.form-signin .form-signin-heading,.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.label-warning {
+    color : #EF6767;
+}
+
+.label-success {
+    color : #97D6D1;
+}
+
+#header {
+    margin-top: -40px !important;
+}
+
+.left {
+    width: 50%;
+    float: left;
+    border-right: 1px solid #97D6D1;
+}
+
+.right {
+    width: 50%;
+    float: right;
+}
+
+.container {
+    width: 100%;
+}
+
+.heading {
+    text-align: center;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+.fb-button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+.g-button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+.fb-icon {
+    background-color: #3B5998;
+}
+
+#header {
+    margin-bottom: 0 !important;
+}

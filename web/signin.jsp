@@ -3,13 +3,13 @@
 <jsp:include page="header.jsp" />
 <html>
 <head>
-    <link href="styles/signin.css" rel="stylesheet">
+    <link href="css/signin.css" rel="stylesheet">
     <title>Login</title>
     <%
         String loggedInUser = (String) session.getAttribute("display_name");
     %>
 </head>
-<body>
+<body style = "background-image: url(/images/logo/rsz_only_logo.png);">
 <%
     if (loggedInUser != null) {
         response.sendRedirect("index.jsp");

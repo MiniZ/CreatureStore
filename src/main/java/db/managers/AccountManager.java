@@ -189,7 +189,7 @@ public class AccountManager {
         return result;
     }
 
-    public void updateUSerImgSrc(String imgSrc, String display_name) {
+    public void updateUserImgSrc(String imgSrc, String display_name) {
         try (Connection conn = dataSource.getConnection()){
             try (PreparedStatement stmt = conn.prepareStatement("update accounts "
                     + "set img_src = ? where display_name = ?")){

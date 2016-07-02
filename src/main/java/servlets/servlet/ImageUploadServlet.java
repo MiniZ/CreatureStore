@@ -101,7 +101,7 @@ public class ImageUploadServlet extends StorageServlet {
                     filename = item.getName();
                     Path path = Paths.get(savePath + File.separator + filename);
                     Files.write(path, data);
-                    manager.updateUSerImgSrc(savePath + File.separator + filename, display_name);
+                    manager.updateUserImgSrc(savePath + File.separator + filename, display_name);
                     //refresh user page
                     RequestDispatcher dispatcher = request
                             .getRequestDispatcher("profile.jsp?username=" + display_name);

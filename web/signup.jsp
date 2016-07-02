@@ -3,7 +3,7 @@
 <jsp:include page="header.jsp" />
 <html>
 <head>
-    <link href="styles/signup.css" rel="stylesheet">
+    <link href="css/signup.css" rel="stylesheet">
     <title>Login</title>
     <%
         String loggedInUser = (String) session.getAttribute("display_name");
@@ -18,7 +18,7 @@
         return;
     }
 %>
-<div class="container">
+<div class="container" style = "background-image: url(/images/logo/rsz_only_logo.png);">
     <form action="SignUp" method="post" class="form-horizontal form-signin" id="gh_sign" role="form"
           accept-charset="UTF-8">
         <div class=heading>

@@ -66,4 +66,6 @@ public class AccountManagerTest {
         assertTrue(am.userExists("user_display_name"));
         assertFalse(am.userExists("rozeta"));
     }
+
+
 }

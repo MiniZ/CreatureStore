@@ -135,3 +135,7 @@ input[type=password], select {
 .fb-icon {
     background-color: #3B5998;
 }
+
+.file-upload-button {
+    background-color: #D05B5B;
+}

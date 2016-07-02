@@ -1,6 +1,7 @@
 package main.java.db.managers;
 
 import main.java.models.Account;
+import main.java.models.AccountType;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -55,13 +56,13 @@ public class AccountManager {
     }
 
     public boolean authenticateUser(String display_name, String hashedPassword) {
-        try (Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             String query = "SELECT * FROM accounts WHERE display_name = ? AND hashed_password = ? ";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, display_name);
             stmt.setString(2, hashedPassword);
             ResultSet result = stmt.executeQuery();
-            if(result.next()){
+            if (result.next()) {
                 conn.close();
                 return true;
             } else {
@@ -77,18 +78,17 @@ public class AccountManager {
 
         boolean flag = false;
 
-        if(userExists(acc.getDisplayName())){
+        if (userExists(acc.getDisplayName())) {
             return false;
-        }
-        else{
-            try (Connection conn = dataSource.getConnection()){
+        } else {
+            try (Connection conn = dataSource.getConnection()) {
                 try (PreparedStatement stmt = conn.prepareStatement("insert into accounts"
                         + "(first_name, last_name, hashed_password, "
                         + "email, display_name, img_src, fb_link, twitter_link, google_plus_link, "
                         + "country, city,  about_me, type, is_banned) "
                         + "values "
                         + "( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                )){
+                )) {
                     stmt.setString(1, acc.getFirstName());
                     stmt.setString(2, acc.getLastName());
                     stmt.setString(3, acc.getHashedPassword());
@@ -110,10 +110,9 @@ public class AccountManager {
                             break;
                     }
 
-                    if(acc.isBanned()){
+                    if (acc.isBanned()) {
                         stmt.setString(14, "1");
-                    }
-                    else {
+                    } else {
                         stmt.setString(14, "0");
                     }
                     stmt.executeUpdate();
@@ -128,5 +127,46 @@ public class AccountManager {
 
         }
         return flag;
+    }
+
+    public Account getAccount(String displayName) {
+        Account res = null;
+        try (Connection conn = dataSource.getConnection()) {
+            try (PreparedStatement stmt = conn.prepareStatement("select * from accounts where display_name = ?")) {
+                stmt.setString(1, displayName);
+                try (ResultSet rset = stmt.executeQuery()) {
+                    if (rset.next()) {
+                        res = fetchAccount(rset);
+                        conn.close();
+                        return res;
+                    } else {
+                        throw new IllegalArgumentException("Invalid display name");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    private Account fetchAccount(ResultSet rset) throws SQLException {
+        boolean isAdmin = false;
+        boolean isBanned = false;
+        if (rset.getString("type").equals("ADMIN")) {
+            isAdmin = true;
+        }
+        if (rset.getString("is_banned").equals("1")) {
+            isBanned = true;
+        }
+
+
+        Account acc1 = new Account(rset.getInt("ID"), rset.getString("first_name"), rset.getString("last_name"),
+                rset.getString("hashed_password"), rset.getString("email"),
+                rset.getString("display_name"), rset.getString("img_src"), rset.getString("fb_link"),
+                rset.getString("twitter_link"), rset.getString("google_plus_link"), rset.getString("country"),
+                rset.getString("city"), rset.getString("about_me"), AccountType.valueOf(rset.getString("type")),
+                isAdmin, isBanned);
+        return acc1;
     }
 }

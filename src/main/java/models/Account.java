@@ -35,7 +35,27 @@ public class Account {
     private boolean isBanned;
 
     public Account() {
+    }
 
+    public Account (int id, String firstName, String lastName, String hashedPassword, String mail, String displayName,
+                    String imgSrc, String fbLink, String twitterLink, String googleLink, String country,
+                    String city, String aboutMe,  AccountType type, boolean isAdmin, boolean isBanned){
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.hashedPassword = hashedPassword;
+        this.mail = mail;
+        this.displayName = displayName;
+        this.imgSrc = imgSrc;
+        this.fbLink = fbLink;
+        this.twitterLink = twitterLink;
+        this.googleLink = googleLink;
+        this.country = country;
+        this.city = city;
+        this.aboutMe = aboutMe;
+        this.type = type;
+        this.isAdmin = isAdmin;
+        this.isBanned = isBanned;
     }
 
     public long getId() {

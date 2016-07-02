@@ -2,5 +2,6 @@ package main.java.models;
 
 public enum  AccountType {
     ADMIN,
-    USER
+    USER,
+    GUEST
 }

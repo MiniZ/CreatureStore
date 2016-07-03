@@ -1,14 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: xatia
-  Date: 5/30/2016
-  Time: 5:38 AM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="java.lang.String"%>
 <%@ page import="main.java.db.managers.AccountManager" %>
+<%@ page import="main.java.models.Post" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.sql.Timestamp" %>
 <jsp:include page="header.jsp" />
 
 <html>
@@ -25,6 +22,24 @@
     <link type="text/css" rel="stylesheet" href="./css/global.css" />
     <script src="./js/jquery-1.12.1.min.js"></script>
     <script src="./js/main.js"></script> -->
+    <title>Post</title>
+    <%
+        String loggedInUser = (String) session.getAttribute("display_name");
+        String postID = request.getParameter("postId");
+        ServletContext sc = getServletConfig().getServletContext();
+        AccountManager manager = (AccountManager) sc.getAttribute(AccountManager.ATTRIBUTE_NAME);
+
+        Post post = manager.getPostById(postID);
+        String img_src = post.getImgSrc();
+        String title = post.getTitle();
+        String description = post.getDescription();
+        Integer account_id = post.getAccountId();
+        Integer post_id = post.getId();
+        Timestamp post_date = post.getPostTime();
+
+        String display_name = manager.getAccountDisplayNameByID(account_id);
+
+    %>
 </head>
 <body style = "background-image: url(../images/logo/rsz_only_logo.png);">
 <div class="post-page">
@@ -34,15 +49,25 @@
 
             <div class="post-author ff-superSquare fs-16 fc-grey-darker">
                 <div class="post-title ff-superSquare fs-18 fc-grey-darker">
-                    Good Morning
+                    <%
+                        out.print(title);
+                    %>
                 </div>
                 <div class="author-avatar bg-avatar left bg-cover pointer"></div>
 
-                <div class="author-name">by <span class="fc-grey-dark pointer on-hover"> Eva Green</span></div>
+                <div class="author-name">by <span class="fc-grey-dark pointer on-hover">
+                    <%
+                        out.print(display_name);
+                    %>
+                </span></div>
             </div>
 
             <div class="post-photo">
-                <img src="https://d13yacurqjgara.cloudfront.net/users/283823/screenshots/2809135/cityscape-01_1x.jpg">
+                <%
+                    out.print("<img src ='");
+                    out.print(img_src);
+                    out.print("'/>");
+                %>
             </div>
 
             <div class="post-comments">
@@ -66,14 +91,18 @@
             <div class="post-date">
                 <span class="ff-superSquare fs-13 fc-grey-darker">Date: </span>
 					<span class="ff-superSquare fs-13 fc-grey-dark">
-						2 July, 2016
+						  <%
+                              out.print(post_date);
+                          %>
 					</span>
             </div>
 
             <div class="post-description">
                 <span class="ff-superSquare fs-13 fc-grey-darker">Description: </span>
 					<span class="ff-superSquare fs-13 fc-grey-dark">
-						Loving that palette dude. And the negative space there in the centre Loving that palette dude. And the negative space there in the centre Loving that palette dude. And the negative space there in the centre ;D
+                        <%
+                            out.print(description);
+                        %>
 					</span>
             </div>
 
@@ -102,11 +131,7 @@
 
         </div>
     </div>
-
-    <div class="right-post ">
-
-
-    </div>
+    
 </div>
 
 </body>

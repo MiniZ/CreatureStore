@@ -2,6 +2,7 @@ package main.java.db.managers;
 
 import main.java.models.Account;
 import main.java.models.AccountType;
+import main.java.models.Post;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -311,7 +312,7 @@ public class AccountManager {
 
     public List<Account> getUserFollowing(String user_display_name) {
         List<Account> result = new ArrayList<>();
-        try (Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             try (PreparedStatement stmt = conn.prepareStatement("SELECT following_id FROM follow WHERE follower_id = ?")) {
                 Account user = getAccount(user_display_name);
                 stmt.setInt(1, Integer.valueOf(String.valueOf(user.getId())));
@@ -330,7 +331,7 @@ public class AccountManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result;
+        return new ArrayList<>();
     }
 
     public boolean isUserAdmin(String display_name) {
@@ -394,9 +395,9 @@ public class AccountManager {
     }
 
     public void unBanUser(String display_name) {
-        try (Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             try (PreparedStatement stmt = conn.prepareStatement("update accounts "
-                    + "set is_banned = ? where display_name = ?")){
+                    + "set is_banned = ? where display_name = ?")) {
                 stmt.setString(1, "0");
                 stmt.setString(2, display_name);
                 stmt.executeUpdate();
@@ -405,5 +406,45 @@ public class AccountManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public Post getPostById(String postID) {
+        try (Connection conn = dataSource.getConnection()){
+            try (PreparedStatement stmt = conn.prepareStatement("select * from post where id = ?")){
+                stmt.setInt(1, Integer.parseInt(postID));
+                ResultSet results = stmt.executeQuery();
+                Post post = new Post();
+                post.setId(results.getInt("id"));
+                post.setAccountId(results.getInt("account_id"));
+                post.setDescription(results.getString("description"));
+                post.setImgSrc(results.getString("img_src"));
+                post.setTitle(results.getString("title"));
+                post.setPostTime(results.getTimestamp("post_time"));
+                conn.close();
+                return post;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getAccountDisplayNameByID(Integer account_id) {
+        String result = "";
+        try {
+            Connection con = dataSource.getConnection();
+            String query = "SELECT display_name FROM accounts WHERE id = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1, account_id);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                result = resultSet.getString("display_name");
+            }
+            con.close();
+            return result;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

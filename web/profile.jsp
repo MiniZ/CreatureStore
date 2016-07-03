@@ -9,6 +9,7 @@
     <title>user profile</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/new_profile.css">
+    <link rel="stylesheet" type="text/css" href="css/following-users.css">
 </head>
 <body style="background-image: url(images/logo/rsz_only_logo.png);">
 
@@ -35,6 +36,11 @@
         if (profileAcc.getImgSrc() == null) {
             profileImg = "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg";
         }
+
+
+        List<Account> userFollowers = manager.getUserFollowers(displayName);
+        List<Account> userFollowing = manager.getUserFollowing(displayName);
+
 %>
 
 <div class="follow-posts-header">
@@ -50,9 +56,12 @@
             <li class="following inline-block ff-superSquare fs-15 fc-grey-dark">
                 <a class="text-deco-none" href="#">uploads</a>
             </li>
-
         </ul>
+    </div>
+</div>
+
 <div class="profile m-auto">
+
     <div class="pic_with_menu">
         <div class="profile-picture m-auto bg-cover">
             <img src="GetImage?image=<%=profileImg%>" class="profile-picture m-auto bg-cover">
@@ -67,8 +76,8 @@
                        value="Upload File"/>
             </form>
         </div>
-
     </div>
+
     <div class="profile-info m-auto ff-superSquare fs-13 fc-grey-dark">
         <div class="margin-top display-name">
             <label><%=displayName%>
@@ -87,9 +96,11 @@
             </label>
         </div>
         <div class="margin-top city">
-            <label><%out.print(city);
+            <label><%
+                out.print(city);
                 out.print(", ");
-                out.print(country);%>
+                out.print(country);
+            %>
             </label>
         </div>
         <div class="facebook-link">
@@ -105,13 +116,40 @@
             </label>
         </div>
     </div>
+
     <div class="profile-about m-auto ff-superSquare fs-15 fc-grey-darker">
         <label><%=aboutMe%>
         </label>
     </div>
+
 </div>
 
+<%for (int i = 0; i < userFollowers.size(); i++){%>
+<div class="user-following-dashboard">
+    <div class="single-user-info">
+        <div class="single-user-picture">
+
+        </div>
+        <div class="single-user-name-email">
+            <div class="single-user-name">
+                <%=userFollowers.get(i).getDisplayName()%>
+            </div>
+            <div class="single-user-email">
+                <%=userFollowers.get(i).getMail()%>
+            </div>
+        </div>
+        <div class="single-user-buttons">
+            <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark follow-unfollow-button">
+                follow
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <%
+        }
     }
 %>
 </body>

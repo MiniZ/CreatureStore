@@ -265,10 +265,11 @@ public class AccountManager {
                 ResultSet resultSet = stmt.executeQuery();
                 while (resultSet.next()) {
                     try (PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM accounts WHERE id = ?")) {
-                        stmt.setInt(1, Integer.valueOf(String.valueOf(resultSet.getString("follower_id"))));
-                        ResultSet resultSet2 = stmt.executeQuery();
+                        stmt2.setInt(1, Integer.valueOf(String.valueOf(resultSet.getString("follower_id"))));
+                        ResultSet resultSet2 = stmt2.executeQuery();
                         while (resultSet2.next()) {
-                            result.add(fetchAccount(resultSet2));
+                            Account follower = fetchAccount(resultSet2);
+                            result.add(follower);
                         }
                     }
                     conn.close();
@@ -289,8 +290,8 @@ public class AccountManager {
                 ResultSet resultSet = stmt.executeQuery();
                 while (resultSet.next()) {
                     try (PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM accounts WHERE id = ?")) {
-                        stmt.setInt(1, Integer.valueOf(String.valueOf(resultSet.getString("following_id"))));
-                        ResultSet resultSet2 = stmt.executeQuery();
+                        stmt2.setInt(1, Integer.valueOf(String.valueOf(resultSet.getString("following_id"))));
+                        ResultSet resultSet2 = stmt2.executeQuery();
                         while (resultSet2.next()) {
                             result.add(fetchAccount(resultSet2));
                         }

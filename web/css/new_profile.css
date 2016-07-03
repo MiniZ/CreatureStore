@@ -3,7 +3,7 @@
     background-color: black;
     width: 100%;
     margin: -8px;
-    margin-right: -23x;
+    margin-right: -23px;
     padding-right: 16px;
 }
 
@@ -12,8 +12,11 @@
     background-color: rgb(240,240,240);
     width: 100%;
     margin: -8px;
-    margin-right: -23x;
+    margin-right: -23px;
     padding-right: 16px;
+	position: absolute;
+	top: 62px;
+	z-index: -1;
 }
 
 .text-deco-none{
@@ -28,6 +31,7 @@
 
 .profile{
 	max-width: 60%;
+	margin-top: 30px;
 }
 
 .profile-picture{

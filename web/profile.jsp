@@ -8,7 +8,7 @@
 <head>
     <title>user profile</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/profile.css">
+    <link rel="stylesheet" type="text/css" href="css/new_profile.css">
 </head>
 <body style="background-image: url(images/logo/rsz_only_logo.png);">
 
@@ -30,55 +30,70 @@
         String googlePlus = profileAcc.getGoogleLink();
         String city = profileAcc.getCity();
         String country = profileAcc.getCountry();
-        String imgSource = profileAcc.getImgSrc();
         String aboutMe = profileAcc.getAboutMe();
         String profileImg = profileAcc.getImgSrc();
+        if (profileAcc.getImgSrc() == null) {
+            profileImg = "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg";
+        }
 %>
 
-
-<div class="profile">
-    <div class="pic_with_menu">
-    <div class="profile-picture">
-        <img src="<%=imgSource%>" alt="no pic">
-    </div>
-        <div class="upload-avatar">
-            <form action="ImageUploadServlet" method="post"
-                  enctype="multipart/form-data">
-                <input type="file" name="file" size="50" />
-                <input type="submit" value="Upload File" />
-            </form>
-        </div>
-    <div class="followers_menu">
+<div class="follow-posts-header">
+    <div class="followers_menu inline-block">
         <ul>
-            <li class="followers"><a href="#">followers</a></li>
-            <li class="following"><a href="#">following</a></li>
+            <li class="followers inline-block ff-superSquare fs-15 fc-grey-dark">
+                <a class="text-deco-none" href="#">followers</a>
+            </li>
+
+            <li class="following inline-block ff-superSquare fs-15 fc-grey-dark">
+                <a class="text-deco-none" href="#">following</a>
+            </li>
+
+            <li class="following inline-block ff-superSquare fs-15 fc-grey-dark">
+                <a class="text-deco-none" href="#">uploads</a>
+            </li>
 
         </ul>
     </div>
+</div>
+
+<div class="profile m-auto">
+    <div class="pic_with_menu">
+        <div class="profile-picture m-auto bg-cover"
+             style="background-image: url(<%=profileImg%>);">
+        </div>
+        <div class="upload-avatar m-auto">
+
+            <form action="ImageUploadServlet" method="post"
+                  enctype="multipart/form-data">
+                <input class="input-btn pointer ff-superSquare fs-13 fc-grey-dark" type="file" name="file"
+                       size="50"/>
+                <input class="input-btn pointer ff-superSquare fs-13 fc-grey-dark" type="submit"
+                       value="Upload File"/>
+            </form>
+        </div>
+
     </div>
-    <div class="profile-info">
-        <div class="display-name">
+    <div class="profile-info m-auto ff-superSquare fs-13 fc-grey-dark">
+        <div class="margin-top display-name">
             <label><%=displayName%>
             </label>
         </div>
-        <div class="first-name">
-            <label><%=firstName%>
+        <div class="margin-top first-name">
+            <label><%
+                out.print(firstName);
+                out.print(" ");
+                out.print(lastName);
+            %>
             </label>
         </div>
-        <div class="last-name">
-            <label><%=lastName%>
-            </label>
-        </div>
-        <div class="email">
+        <div class="margin-top email">
             <label><%=email%>
             </label>
         </div>
-        <div class="city">
-            <label><%=city%>
-            </label>
-        </div>
-        <div class="country">
-            <label><%=country%>
+        <div class="margin-top city">
+            <label><%out.print(city);
+                out.print(", ");
+                out.print(country);%>
             </label>
         </div>
         <div class="facebook-link">
@@ -90,15 +105,16 @@
             </label>
         </div>
         <div class="google-link">
-            <label><%=googlePlus%>
+            <label><<%=googlePlus%>
             </label>
         </div>
     </div>
-    <div class="profile-about">
+    <div class="profile-about m-auto ff-superSquare fs-15 fc-grey-darker">
         <label><%=aboutMe%>
         </label>
     </div>
 </div>
+
 <%
     }
 %>

@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <%
         String loggedInUser = (String) session.getAttribute("display_name");
+        Boolean is_admin = (Boolean) session.getAttribute("is_admin");
     %>
 </head>
 <body>
@@ -34,6 +35,10 @@
             <ul id="top-right-menu">
                 <%
                     if (loggedInUser != null) {
+                        if (is_admin != null && is_admin) {
+                            out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/admin.jsp\" class=\"admin-li\">" + "Admin Panel" + "</a></li>");
+                            out.print("<li>");
+                        }
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/postupload.jsp\" class=\"post-upload-li\">" + "Upload Post"+ "</a></li>");
                         out.print("<li>");
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/profile.jsp?username=" + loggedInUser + "\">" + loggedInUser + "</a></li>");

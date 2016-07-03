@@ -1,0 +1,162 @@
+body {
+    padding-top: 40px;
+    background-color: #D4E8E7;
+}
+
+.form-signin {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+.form-signin-button {
+    background-color: #DE5B4D;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#gh_sign {
+}
+
+#gh_sign-other {
+    float: left;
+}
+
+.form-signin .form-signin-heading,.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 7px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.label-warning {
+    color : #EF6767;
+}
+
+.label-success {
+    color : #777777;
+}
+
+#header {
+    margin-top: -40px !important;
+}
+
+.left {
+    width: 50%;
+    float: left;
+    border-right: 1px solid #97D6D1;
+}
+
+.right {
+    width: 50%;
+    float: right;
+}
+
+.container {
+    width: 100%;
+}
+
+.heading {
+    text-align: center;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+.fb-button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+.g-button {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #97D6D1;
+    box-sizing: border-box;
+}
+
+.field-label {
+    display: inline-block;
+    color: #1D1B1B !important;
+}
+
+.field-label:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.label-field {
+    display: inline-block;
+    width: 10%;
+    float: right;
+}
+
+.form-signin-button:hover {
+    cursor: pointer;
+}
+
+.clear {
+    clear: both;
+}
+
+.red-button {
+    background-color: #EF786C !important;
+}
+
+.green-button {
+    background-color: #5CCA63 !important;
+}
+
+.form-group {
+    border: 1px solid #61B9B2;
+    padding: 8px;
+    border-radius: 2px;
+}
+
+.a-label {
+    text-decoration: blink;
+    color: #1D1B1B !important;
+}

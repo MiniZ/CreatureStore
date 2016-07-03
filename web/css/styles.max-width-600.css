@@ -3,4 +3,23 @@
     .post-dashboard{
         max-width: 300px;
     }
+
+    
 }
+
+
+
+
+@media screen and (max-width: 600px) {
+   .post-photo img {
+	    max-width: 300px;
+	    max-height: 250px;
+    }
+
+    .right-content {
+	    margin-left: -335px !important;
+    	max-width: 60% !important;
+    	
+	}
+}
+

@@ -10,3 +10,18 @@
         max-width: 620px;
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .inline-block{
+    	display: inline-block;
+    	
+    }
+
+    .right-content{
+    	top: 625px;
+    	margin-left: 0px;
+    	max-width: 44%;
+    	margin-bottom: 100px;
+    	margin-left: -440px;
+    }
+}

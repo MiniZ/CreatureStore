@@ -1,3 +1,7 @@
+.user-followers-dashboard{
+    display: none;
+}
+
 .single-user-info {
     margin: 25px 35px 25px 35px;
     width: 400px;

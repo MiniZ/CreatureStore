@@ -124,8 +124,8 @@
 
 </div>
 
-<%for (int i = 0; i < userFollowers.size(); i++){%>
-<div class="user-following-dashboard">
+<%for (int i = 0; i < userFollowers.size(); i++) {%>
+<div class="user-followers-dashboard">
     <div class="single-user-info">
         <div class="single-user-picture">
 
@@ -145,11 +145,37 @@
         </div>
     </div>
 </div>
+<%
+    }
+%>
 
+<%for (int i = 0; i < userFollowing.size(); i++) {%>
+<div class="user-following-dashboard">
+    <div class="single-user-info">
+        <div class="single-user-picture">
 
+        </div>
+        <div class="single-user-name-email">
+            <div class="single-user-name">
+                <%=userFollowing.get(i).getDisplayName()%>
+            </div>
+            <div class="single-user-email">
+                <%=userFollowing.get(i).getMail()%>
+            </div>
+        </div>
+        <div class="single-user-buttons">
+            <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark follow-unfollow-button">
+                unfollow
+            </div>
+        </div>
+    </div>
+</div>
+<%
+    }
+%>
 
 <%
-        }
+
     }
 %>
 </body>

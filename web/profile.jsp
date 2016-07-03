@@ -3,6 +3,7 @@
 <%@ page import="main.java.db.managers.AccountManager" %>
 <%@ page import="java.util.List" %>
 <%@ page import="main.java.models.Account" %>
+<%@ page import="java.util.ArrayList" %>
 <jsp:include page="header.jsp"/>
 <html>
 <head>
@@ -10,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/new_profile.css">
     <link rel="stylesheet" type="text/css" href="css/following-users.css">
+    <script src="/javascript/profile.js"></script>
 </head>
 <body style="background-image: url(images/logo/rsz_only_logo.png);">
 
@@ -37,23 +39,27 @@
             profileImg = "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg";
         }
 
-
         List<Account> userFollowers = manager.getUserFollowers(displayName);
         List<Account> userFollowing = manager.getUserFollowing(displayName);
+        List<String> userFollowingDisplayNames = new ArrayList<>();
+
+        for (int i = 0; i < userFollowing.size(); i++) {
+            userFollowingDisplayNames.add(userFollowing.get(i).getDisplayName());
+        }
 
 %>
 
 <div class="follow-posts-header">
     <div class="followers_menu inline-block">
         <ul>
-            <li class="followers inline-block ff-superSquare fs-15 fc-grey-dark">
-                <a class="text-deco-none" href="#">followers</a>
+            <li class=" inline-block ff-superSquare fs-15 fc-grey-dark" style="background-color: #90d2de;" onclick="followersClick()">
+                <a id="followers" class=" followers text-deco-none" onclick="followersClick()" href="#">followers</a>
             </li>
-            <li class="following inline-block ff-superSquare fs-15 fc-grey-dark">
-                <a class="text-deco-none" href="#">following</a>
+            <li class="following inline-block ff-superSquare fs-15 fc-grey-dark" onclick="followingClick()">
+                <a id="following" class=" following text-deco-none"  onclick="followingClick()" href="#">following</a>
             </li>
 
-            <li class="following inline-block ff-superSquare fs-15 fc-grey-dark">
+            <li class="uploads inline-block ff-superSquare fs-15 fc-grey-dark">
                 <a class="text-deco-none" href="#">uploads</a>
             </li>
         </ul>
@@ -125,7 +131,7 @@
 </div>
 
 <%for (int i = 0; i < userFollowers.size(); i++) {%>
-<div class="user-followers-dashboard">
+<div id="user-followers-dashboard" class="user-followers-dashboard">
     <div class="single-user-info">
         <div class="single-user-picture">
 
@@ -140,7 +146,12 @@
         </div>
         <div class="single-user-buttons">
             <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark follow-unfollow-button">
-                follow
+                <% if (userFollowingDisplayNames.contains(userFollowers.get(i).getDisplayName())) {
+                    out.print("unfollow");
+                }else{
+                    out.print("follow");
+                }
+                %>
             </div>
         </div>
     </div>
@@ -150,7 +161,7 @@
 %>
 
 <%for (int i = 0; i < userFollowing.size(); i++) {%>
-<div class="user-following-dashboard">
+<div id="user-following-dashboard" class="user-following-dashboard">
     <div class="single-user-info">
         <div class="single-user-picture">
 

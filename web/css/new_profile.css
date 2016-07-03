@@ -64,3 +64,35 @@
 .margin-top{
 	margin-top: 10px;
 }
+
+.followers {
+	padding-left: 25px;
+}
+
+.followers :hover{
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+.following {
+	padding-left: 25px;
+}
+
+.following:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
+.uploads {
+	padding-left: 25px;
+}
+
+.uploads:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+
+.followers:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}

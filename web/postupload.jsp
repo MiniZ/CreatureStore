@@ -4,16 +4,19 @@
 <head>
     <link href="css/postupload.css" rel="stylesheet">
     <title>Post Upload</title>
-    <%
-        String loggedInUser = (String) session.getAttribute("display_name");
-    %>
+        <%
+            String loggedInUser = (String) session.getAttribute("display_name");
+            if (loggedInUser == null) {
+                response.sendRedirect("index.jsp");
+            }
+        %>
 </head>
 <body style = "background-image: url(/images/logo/rsz_only_logo.png);">
     <div class="container">
         <div class=heading>
             <%
                 String incorrectID = (String) request
-                        .getAttribute("incorrectUsername");
+                        .getAttribute("tryAgain");
                 String incorrectPass = (String) request
                         .getAttribute("incorrectPassword");
                 if (incorrectID != null || incorrectPass != null)
@@ -28,7 +31,7 @@
                    autofocus id="post_title" name="post_title">
 
             <input type="text" class="form-control" placeholder="description" required
-                   autofocus id="description_title" name="description_title">
+                   autofocus id="post_description" name="post_description">
 
             <input type="text" class="form-control" placeholder="youtube_link" required
                    autofocus id="youtube_link" name="youtube_link">

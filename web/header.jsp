@@ -34,6 +34,8 @@
             <ul id="top-right-menu">
                 <%
                     if (loggedInUser != null) {
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/postupload.jsp\" class=\"post-upload-li\">" + "Upload Post"+ "</a></li>");
+                        out.print("<li>");
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/profile.jsp?username=" + loggedInUser + "\">" + loggedInUser + "</a></li>");
                         out.print("<li>");
                         out.print("<form action=\"Logout\" role=\"form\" id=\"signout\">");

@@ -73,3 +73,8 @@ body {
 #top-nav ul li.active a, #top-nav ul li a:hover {
     color: white;
 }
+
+.post-upload-li {
+    color: #8BC9DE !important;
+    font-weight: bold;
+}

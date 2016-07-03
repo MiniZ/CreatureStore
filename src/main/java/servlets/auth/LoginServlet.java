@@ -62,6 +62,11 @@ public class LoginServlet  extends HttpServlet {
                     }
                     HttpSession session = request.getSession();
                     session.setAttribute("display_name", display_name);
+                    if (manager.isUserAdmin(display_name)) {
+                        session.setAttribute("is_admin", true);
+                    } else {
+                        session.setAttribute("is_admin", false);
+                    }
                     response.sendRedirect("index.jsp");
                 } else {
                     request.setAttribute("incorrectPassword", "true");

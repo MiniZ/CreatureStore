@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AccountManager {
 
@@ -305,4 +307,69 @@ public class AccountManager {
         return result;
     }
 
+    public boolean isUserAdmin(String display_name) {
+        boolean isAdmin = false;
+        try {
+            Connection con = dataSource.getConnection();
+            String query = "SELECT type FROM accounts WHERE display_name = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setString(1, display_name);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                if (resultSet.getString("type").equals("ADMIN")) {
+                    isAdmin = true;
+                }
+            }
+            con.close();
+            return isAdmin;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isAdmin;
+    }
+
+    public Map<String , Boolean> getAllAccountsBannedMap() {
+        Map<String, Boolean> resultMap = new HashMap<>();
+        try {
+            Connection con = dataSource.getConnection();
+            String query = "SELECT display_name, is_banned FROM accounts";
+            PreparedStatement stmt = con.prepareStatement(query);
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                resultMap.put(resultSet.getString("display_name"), resultSet.getString("is_banned").equals("1"));
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultMap;
+    }
+
+    public void banUser(String display_name) {
+        try (Connection conn = dataSource.getConnection()){
+            try (PreparedStatement stmt = conn.prepareStatement("update accounts "
+                    + "set is_banned = ? where display_name = ?")){
+                stmt.setString(1, "1");
+                stmt.setString(2, display_name);
+                stmt.executeUpdate();
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void unBanUser(String display_name) {
+        try (Connection conn = dataSource.getConnection()){
+            try (PreparedStatement stmt = conn.prepareStatement("update accounts "
+                    + "set is_banned = ? where display_name = ?")){
+                stmt.setString(1, "0");
+                stmt.setString(2, display_name);
+                stmt.executeUpdate();
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

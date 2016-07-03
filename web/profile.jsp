@@ -43,7 +43,6 @@
             <li class="followers inline-block ff-superSquare fs-15 fc-grey-dark">
                 <a class="text-deco-none" href="#">followers</a>
             </li>
-
             <li class="following inline-block ff-superSquare fs-15 fc-grey-dark">
                 <a class="text-deco-none" href="#">following</a>
             </li>
@@ -53,13 +52,10 @@
             </li>
 
         </ul>
-    </div>
-</div>
-
 <div class="profile m-auto">
     <div class="pic_with_menu">
-        <div class="profile-picture m-auto bg-cover"
-             style="background-image: url(<%=profileImg%>);">
+        <div class="profile-picture m-auto bg-cover">
+            <img src="GetImage?image=<%=profileImg%>" class="profile-picture m-auto bg-cover">
         </div>
         <div class="upload-avatar m-auto">
 

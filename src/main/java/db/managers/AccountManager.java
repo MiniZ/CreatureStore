@@ -222,4 +222,86 @@ public class AccountManager {
             e.printStackTrace();
         }
     }
+
+    public boolean followUser(String logged_in_user_display_name, String chosen_user_display_name) {
+        try (Connection conn = dataSource.getConnection()){
+            try (PreparedStatement stmt = conn.prepareStatement("insert into follow (follower_id, following_id)"
+                    + "values (?, ?)")){
+                Account logged = getAccount(logged_in_user_display_name);
+                Account chosen = getAccount(chosen_user_display_name);
+                stmt.setInt(1, Integer.valueOf(String.valueOf(logged.getId())));
+                stmt.setInt(2, Integer.valueOf(String.valueOf(chosen.getId())));
+                stmt.executeUpdate();
+                conn.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean unFollowUser(String logged_in_user_display_name, String chosen_user_display_name) {
+        try (Connection conn = dataSource.getConnection()){
+            try (PreparedStatement stmt = conn.prepareStatement("delete from follow WHERE follower_id = ? and following_id = ?")){
+                Account logged = getAccount(logged_in_user_display_name);
+                Account chosen = getAccount(chosen_user_display_name);
+                stmt.setInt(1, Integer.valueOf(String.valueOf(logged.getId())));
+                stmt.setInt(2, Integer.valueOf(String.valueOf(chosen.getId())));
+                stmt.executeUpdate();
+                conn.close();
+                return true;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public List<Account> getUserFollowers(String user_display_name) {
+        List<Account> result = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection()){
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT follower_id FROM follow WHERE following_id = ?")) {
+                Account user = getAccount(user_display_name);
+                stmt.setInt(1, Integer.valueOf(String.valueOf(user.getId())));
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    try (PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM accounts WHERE id = ?")) {
+                        stmt.setInt(1, Integer.valueOf(String.valueOf(resultSet.getString("follower_id"))));
+                        ResultSet resultSet2 = stmt.executeQuery();
+                        while (resultSet2.next()) {
+                            result.add(fetchAccount(resultSet2));
+                        }
+                    }
+                    conn.close();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<Account> getUserFollowing(String user_display_name) {
+        List<Account> result = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection()){
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT following_id FROM follow WHERE follower_id = ?")) {
+                Account user = getAccount(user_display_name);
+                stmt.setInt(1, Integer.valueOf(String.valueOf(user.getId())));
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    try (PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM accounts WHERE id = ?")) {
+                        stmt.setInt(1, Integer.valueOf(String.valueOf(resultSet.getString("following_id"))));
+                        ResultSet resultSet2 = stmt.executeQuery();
+                        while (resultSet2.next()) {
+                            result.add(fetchAccount(resultSet2));
+                        }
+                    }
+                    conn.close();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

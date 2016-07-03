@@ -193,3 +193,11 @@
   cursor: auto;
 }
 
+.inline-block{
+  display: inline-block;
+}
+
+
+.text-deco-none{
+  text-decoration: none;
+}

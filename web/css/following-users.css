@@ -1,0 +1,57 @@
+.single-user-info {
+    margin: 25px 35px 25px 35px;
+    width: 400px;
+    height: 100px;
+    float: left;
+
+    border-color: #000;
+    border: solid;
+}
+
+.single-user-picture {
+    width: 60px;
+    height: 60px;
+    margin: 20px 20px 20px 20px;
+    float: left;
+
+    border: solid;
+}
+
+.single-user-name-email {
+    width: 180px;
+    height: 60px;
+    margin: 20px 20px 20px 0px;
+    float: left;
+
+    /*border: solid;*/
+
+}
+
+.single-user-buttons {
+    width: 60px;
+    height: 60px;
+    margin: 20px 20px 20px 0px;
+    float: left;
+
+    /*border: solid;*/
+}
+
+.btn{
+    display: inline-block;
+    line-height: 1.6em;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    /*margin-top: 50px;*/
+}
+
+.follow-unfollow-button {
+    width: 70px !important;
+}
+
+.btn-tag{
+    border-radius: 6%;
+    padding: 4px 5px;
+    background: rgb(212, 212, 212);
+    margin: 1.3em 0.1em;
+}

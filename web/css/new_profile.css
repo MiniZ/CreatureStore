@@ -1,0 +1,62 @@
+.about-header{
+ 	height: 55px;
+    background-color: black;
+    width: 100%;
+    margin: -8px;
+    margin-right: -23x;
+    padding-right: 16px;
+}
+
+.follow-posts-header{
+	height: 55px;
+    background-color: rgb(240,240,240);
+    width: 100%;
+    margin: -8px;
+    margin-right: -23x;
+    padding-right: 16px;
+}
+
+.text-deco-none{
+	color: #444;
+	margin-right: 20px;
+}
+
+.text-deco-none:hover{
+	opacity: 0.7;
+
+}
+
+.profile{
+	max-width: 60%;
+}
+
+.profile-picture{
+	width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.input-tbn{
+	border-radius: 6%;
+	
+}
+
+.upload-avatar{
+	margin-top: 20px;
+	text-align: center;
+}
+
+.profile-info{
+	max-width: 33%;
+	text-align: center;
+}
+
+.profile-about{
+	margin-top: 20px;
+	max-width: 70%;
+	text-align: center;
+}
+
+.margin-top{
+	margin-top: 10px;
+}

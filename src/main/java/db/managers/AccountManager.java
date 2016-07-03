@@ -74,6 +74,26 @@ public class AccountManager {
         return false;
     }
 
+    public int userIsBanned(String display_name, String hashedPassword) {
+        try (Connection conn = dataSource.getConnection()) {
+            String query = "SELECT is_banned FROM accounts WHERE display_name = ? AND hashed_password = ? ";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, display_name);
+            stmt.setString(2, hashedPassword);
+            ResultSet result = stmt.executeQuery();
+            if (result.next()) {
+                int res = result.getInt("is_banned");
+                conn.close();
+                return res;
+            } else {
+                return -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
     public boolean createAccount(Account acc) {
 
         boolean flag = false;

@@ -53,6 +53,13 @@ public class LoginServlet  extends HttpServlet {
                     .getAttribute(AccountManager.ATTRIBUTE_NAME);
             if (manager.userExists(display_name)) {
                 if (manager.authenticateUser(display_name, hashedPassword)) {
+                    if (manager.userIsBanned(display_name, hashedPassword) == 1) {
+                        request.setAttribute("userIsBanned", "true");
+                        RequestDispatcher dispatcher = request
+                                .getRequestDispatcher("signin.jsp");
+                        dispatcher.forward(request, response);
+                        return;
+                    }
                     HttpSession session = request.getSession();
                     session.setAttribute("display_name", display_name);
                     response.sendRedirect("index.jsp");

@@ -23,10 +23,16 @@
                         .getAttribute("incorrectUsername");
                 String incorrectPass = (String) request
                         .getAttribute("incorrectPassword");
-                if (incorrectID != null || incorrectPass != null)
+                String banned = (String) request
+                        .getAttribute("userIsBanned");
+                if (incorrectID != null || incorrectPass != null) {
                     out.print("<h1 class=\"form-signin-heading text-center\"><span class=\"label-warning ff-superSquareCap fc-grey fs-30\">Please try again</span></h1>");
-                else
+                } else {
                     out.print("<h1 class=\"form-signin-heading text-center\"><span class=\"label-success ff-superSquareCap fc-grey fs-30\">Please Sign In</span></h1>");
+                }
+                if (banned != null && banned.equals("true")){
+                    out.print("<h1 class=\"form-signin-heading text-center\"><span class=\"label-success ff-superSquareCap fc-grey fs-30\">You are banned by page Admin!</span></h1>");
+                }
             %>
         </div>
         <form action="login" method="post" class="form-signin" id="gh_sign"

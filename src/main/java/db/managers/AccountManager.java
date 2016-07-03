@@ -412,20 +412,23 @@ public class AccountManager {
             try (PreparedStatement stmt = conn.prepareStatement("select * from post where id = ?")){
                 stmt.setInt(1, Integer.parseInt(postID));
                 ResultSet results = stmt.executeQuery();
-                Post post = new Post();
-                post.setId(results.getInt("id"));
-                post.setAccountId(results.getInt("account_id"));
-                post.setDescription(results.getString("description"));
-                post.setImgSrc(results.getString("img_src"));
-                post.setTitle(results.getString("title"));
-                post.setPostTime(results.getTimestamp("post_time"));
-                conn.close();
-                return post;
+                if (results.next()) {
+                    Post post = new Post();
+                    post.setId(results.getInt("id"));
+                    post.setAccountId(results.getInt("account_id"));
+                    post.setDescription(results.getString("description"));
+                    post.setImgSrc(results.getString("img_src"));
+                    post.setTitle(results.getString("title"));
+                    post.setPostTime(results.getTimestamp("post_time"));
+                    conn.close();
+                    return post;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
+        return null;
     }
 
     public String getAccountDisplayNameByID(Integer account_id) {
@@ -438,6 +441,26 @@ public class AccountManager {
             ResultSet resultSet = stmt.executeQuery();
             if (resultSet.next()) {
                 result = resultSet.getString("display_name");
+            }
+            con.close();
+            return result;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public String getUserAvatarByID(Integer account_id) {
+        String result = "";
+        try {
+            Connection con = dataSource.getConnection();
+            String query = "SELECT img_src FROM accounts WHERE id = ?";
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1, account_id);
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                result = resultSet.getString("img_src");
             }
             con.close();
             return result;

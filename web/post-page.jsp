@@ -38,6 +38,7 @@
         Timestamp post_date = post.getPostTime();
 
         String display_name = manager.getAccountDisplayNameByID(account_id);
+        String user_avatar = manager.getUserAvatarByID(account_id);
 
     %>
 </head>
@@ -53,7 +54,9 @@
                         out.print(title);
                     %>
                 </div>
-                <div class="author-avatar bg-avatar left bg-cover pointer"></div>
+                <div class="author-avatar bg-avatar left bg-cover pointer">
+                    <img src=GetImage?image=<%=user_avatar%> >
+                </div>
 
                 <div class="author-name">by <span class="fc-grey-dark pointer on-hover">
                     <%

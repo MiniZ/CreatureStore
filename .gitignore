@@ -32,4 +32,5 @@ out
 src/main/java/db/DBConfig.java
 web/META-INF/context.xml
 web/WEB-INF/app.properties
+web/images/storage
 

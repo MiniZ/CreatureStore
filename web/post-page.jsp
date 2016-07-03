@@ -54,8 +54,8 @@
                         out.print(title);
                     %>
                 </div>
-                <div class="author-avatar bg-avatar left bg-cover pointer">
-                    <img src=GetImage?image=<%=user_avatar%> >
+                <div class="author-avatar left bg-cover pointer">
+                    <img src="GetImage?image=<%=user_avatar%>" >
                 </div>
 
                 <div class="author-name">by <span class="fc-grey-dark pointer on-hover">

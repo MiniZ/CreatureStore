@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostManager {
 
@@ -62,5 +64,38 @@ public class PostManager {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public List<Post> getAllPosts() {
+        List<Post> result = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection()) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT id, title from post ORDER BY post_time DESC ")) {
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    Post post = new Post();
+                    post.setId(resultSet.getInt("id"));
+                    post.setTitle(resultSet.getString("title"));
+                    result.add(post);
+                }
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void deletePost(String post_id) {
+        try (Connection conn = dataSource.getConnection()){
+            try (PreparedStatement stmt = conn.prepareStatement("delete from post WHERE id = ?")){
+                stmt.setInt(1, Integer.valueOf(post_id));
+                stmt.executeUpdate();
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

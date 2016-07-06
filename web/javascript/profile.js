@@ -38,4 +38,9 @@ $( document ).ready(function() {
         var url = 'http://localhost:8080/users.jsp?search=' + inp;
         window.location.href = url;
     });
+
+    $('.users-search').keypress(function(e){
+        if(e.keyCode==13)
+            $('.search-button').click();
+    });
 });

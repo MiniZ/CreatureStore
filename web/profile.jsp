@@ -26,11 +26,9 @@
     if (request.getParameter("username") != null) {
         displayName = request.getParameter("username");
         Account profileAcc = manager.getAccount(displayName);
-        long id = profileAcc.getId();
         String firstName = profileAcc.getFirstName();
         String lastName = profileAcc.getLastName();
         String email = profileAcc.getMail();
-        String password = profileAcc.getHashedPassword();
         String facebook = profileAcc.getFbLink();
         String twitter = profileAcc.getTwitterLink();
         String googlePlus = profileAcc.getGoogleLink();

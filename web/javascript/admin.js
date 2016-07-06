@@ -30,9 +30,19 @@ $( document ).ready(function() {
         var inp = $('.user-search').val();
         window.location.href = 'http://localhost:8080/admin.jsp?post=&user=' + inp;
     });
+
     $('.post-search-button').click(function () {
         var inp = $('.post-search').val();
         window.location.href = 'http://localhost:8080/admin.jsp?user=&type=post&post=' + inp;
     });
 
+    $('.user-search').keypress(function(e){
+        if(e.keyCode==13)
+            $('.user-search-button').click();
+    });
+
+    $('.post-search').keypress(function(e){
+        if(e.keyCode==13)
+            $('.post-search-button').click();
+    });
 });

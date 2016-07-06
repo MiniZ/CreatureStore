@@ -46,6 +46,9 @@
 
         ArrayList<String> tags = postManager.getTagsByPostID(post_id);
 
+        int pluses = postManager.getPlusCountOnPost(post_id);
+        int minuses = postManager.getMinusCountOnPost(post_id);
+
 
     %>
 </head>
@@ -75,19 +78,31 @@
             <div class="post-photo">
                 <img src="GetImage?image=<%=img_src%>">
             </div>
+
+            <div class="post-comments">
+
+            </div>
         </div>
 
 
         <div class="right-content inline-block ">
 
             <div class="post-pluses">
-                <div class="plus-minus-num bg-plus-icon bg-cover  pointer on-hover"></div>
-                <span class="ff-superSquare fc-grey-dark">1024</span>
+                <form action="PlusPostServlet" method="post"
+                      role="form">
+                    <input type="hidden" value='<%=post.getId()%>' name="post_id">
+                    <button class="plus-minus-num bg-plus-icon bg-cover  pointer on-hover" type="submit"></button>
+                    <span class="ff-superSquare fc-grey-dark"><%=pluses%></span>
+                </form>
             </div>
 
             <div class="post-minuses">
-                <div class="plus-minus-num bg-minus-icon bg-cover  pointer on-hover"></div>
-                <span class="ff-superSquare fc-grey-dark">1024</span>
+                <form action="MinusPostServlet" method="post"
+                      role="form">
+                    <input type="hidden" value='<%=post.getId()%>' name="post_id">
+                    <button class="plus-minus-num bg-minus-icon bg-cover  pointer on-hover" type="submit"></button>
+                    <span class="ff-superSquare fc-grey-dark"><%=minuses%></span>
+                </form>
             </div>
 
             <div class="post-date">

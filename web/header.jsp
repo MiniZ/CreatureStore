@@ -20,13 +20,12 @@
         </div>
         <div id="top-nav">
             <ul id="top-left-menu">
-                <li class="ff-superSquareCap fc-grey fs-13"><a href="#">Newest</a></li>
+                <li class="ff-superSquareCap fc-grey fs-13"><a href="/index.jsp">Newest</a></li>
                 <%
                     if (loggedInUser != null) {
-                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"#\">Following</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"/following-posts.jsp\">Following</a></li>");
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"#\">+ Plus</a></li>");
-                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"#\">- Minus</a></li>");
-                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/users.jsp?search=\">Users</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"/users.jsp?search=\">Users</a></li>");
                     }
                 %>
 
@@ -37,12 +36,12 @@
                 <%
                     if (loggedInUser != null) {
                         if (is_admin != null && is_admin) {
-                            out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/admin.jsp?user=&post=\" class=\"admin-li\">" + "Admin Panel" + "</a></li>");
+                            out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"/admin.jsp?user=&post=\" class=\"admin-li\">" + "Admin Panel" + "</a></li>");
                             out.print("<li>");
                         }
-                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/postupload.jsp\" class=\"post-upload-li\">" + "Upload Post"+ "</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"/postupload.jsp\" class=\"post-upload-li\">" + "Upload Post"+ "</a></li>");
                         out.print("<li>");
-                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/profile.jsp?username=" + loggedInUser + "\">" + loggedInUser + "</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"/profile.jsp?username=" + loggedInUser + "\">" + loggedInUser + "</a></li>");
                         out.print("<li>");
                         out.print("<form action=\"Logout\" role=\"form\" id=\"signout\">");
                         out.print("<a href=\"#\" onclick=\'gotosignout()\'>Sign out</a>");

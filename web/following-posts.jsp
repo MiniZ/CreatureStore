@@ -20,7 +20,9 @@
         AccountManager manager = (AccountManager) sc.getAttribute(AccountManager.ATTRIBUTE_NAME);
         PostManager postManager = (PostManager) sc.getAttribute(PostManager.ATTRIBUTE_NAME);
 
-        List<Post> posts = postManager.getPosts();
+        String loggedInUser = (String) session.getAttribute("display_name");
+
+        List<Post> posts = postManager.getUserFollowingPosts(loggedInUser);
         Map<Integer, String> user_names = new HashMap<>();
         for (Post post : posts) {
             user_names.put(post.getId(), manager.getAccountDisplayNameByID(post.getAccountId()));
@@ -89,6 +91,7 @@
 
         }
     %>
+
 
 </div>
 

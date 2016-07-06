@@ -14,6 +14,8 @@
         <title>Admin Panel</title>
             <%
                 String type  = request.getParameter("type");
+                String user = request.getParameter("user");
+                String postt = request.getParameter("post");
                 String loggedInUser = (String) session.getAttribute("display_name");
                 Boolean is_admin = (Boolean) session.getAttribute("is_admin");
                 if (loggedInUser == null) {
@@ -25,9 +27,9 @@
                 ServletContext sc = getServletConfig().getServletContext();
                 AccountManager manager = (AccountManager) sc.getAttribute(AccountManager.ATTRIBUTE_NAME);
                 PostManager postManager = (PostManager) sc.getAttribute(PostManager.ATTRIBUTE_NAME);
-                Map<String, Boolean> users = manager.getAllAccountsBannedMap();
+                Map<String, Boolean> users = manager.getAllAccountsBannedMap(user);
 
-                List<Post> posts = postManager.getAllPosts();
+                List<Post> posts = postManager.getAllPosts(postt);
                 boolean isPost = false;
                 if (type == null) {
                     isPost = false;

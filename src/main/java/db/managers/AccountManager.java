@@ -354,12 +354,20 @@ public class AccountManager {
         return isAdmin;
     }
 
-    public Map<String , Boolean> getAllAccountsBannedMap() {
+    public Map<String , Boolean> getAllAccountsBannedMap(String user) {
         Map<String, Boolean> resultMap = new HashMap<>();
         try {
             Connection con = dataSource.getConnection();
-            String query = "SELECT display_name, is_banned FROM accounts";
+            String query;
+            if (user != null && !user.isEmpty()) {
+                query = "SELECT display_name, is_banned FROM accounts where display_name like ?";
+            } else {
+                query = "SELECT display_name, is_banned FROM accounts";
+            }
             PreparedStatement stmt = con.prepareStatement(query);
+            if (user != null && !user.isEmpty()) {
+                stmt.setString(1, "%" + user + "%");
+            }
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 resultMap.put(resultSet.getString("display_name"), resultSet.getString("is_banned").equals("1"));

@@ -66,10 +66,19 @@ public class PostManager {
         return 0;
     }
 
-    public List<Post> getAllPosts() {
+    public List<Post> getAllPosts(String postt) {
         List<Post> result = new ArrayList<>();
         try (Connection conn = dataSource.getConnection()) {
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT id, title from post ORDER BY post_time DESC ")) {
+            String query;
+            if (postt != null && !postt.isEmpty()) {
+                query = "SELECT id, title from post where title like ? ORDER BY post_time DESC";
+            } else {
+                query = "SELECT id, title from post ORDER BY post_time DESC";
+            }
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                if (postt != null && !postt.isEmpty()) {
+                    stmt.setString(1, "%" + postt + "%");
+                }
                 ResultSet resultSet = stmt.executeQuery();
                 while (resultSet.next()) {
                     Post post = new Post();

@@ -26,4 +26,13 @@ $( document ).ready(function() {
         posts_board.setAttribute("style", "display: block");
     });
 
+    $('.user-search-button').click(function () {
+        var inp = $('.user-search').val();
+        window.location.href = 'http://localhost:8080/admin.jsp?post=&user=' + inp;
+    });
+    $('.post-search-button').click(function () {
+        var inp = $('.post-search').val();
+        window.location.href = 'http://localhost:8080/admin.jsp?user=&type=post&post=' + inp;
+    });
+
 });

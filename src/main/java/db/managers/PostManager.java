@@ -3,10 +3,7 @@ package main.java.db.managers;
 import main.java.models.Post;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,25 +63,17 @@ public class PostManager {
         return 0;
     }
 
-    public List<Post> getAllPosts(String postt) {
-        List<Post> result = new ArrayList<>();
+    public ArrayList<String> getTagsByPostID(Integer post_id) {
+        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<Integer> tagIDs = new ArrayList<Integer>();
+
+
         try (Connection conn = dataSource.getConnection()) {
-            String query;
-            if (postt != null && !postt.isEmpty()) {
-                query = "SELECT id, title from post where title like ? ORDER BY post_time DESC";
-            } else {
-                query = "SELECT id, title from post ORDER BY post_time DESC";
-            }
-            try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                if (postt != null && !postt.isEmpty()) {
-                    stmt.setString(1, "%" + postt + "%");
-                }
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT tag_id from post_tag where post_id = ?")) {
+                stmt.setInt(1, post_id);
                 ResultSet resultSet = stmt.executeQuery();
-                while (resultSet.next()) {
-                    Post post = new Post();
-                    post.setId(resultSet.getInt("id"));
-                    post.setTitle(resultSet.getString("title"));
-                    result.add(post);
+                if (resultSet.next()) {
+                    tagIDs.add(resultSet.getInt("tag_id"));
                 }
                 conn.close();
             } catch (SQLException e) {
@@ -93,18 +82,59 @@ public class PostManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        for (Integer tagID : tagIDs) {
+
+            try (Connection conn = dataSource.getConnection()) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT tag from tag where id = ?")) {
+                    stmt.setInt(1, tagID);
+                    ResultSet resultSet = stmt.executeQuery();
+                    if (resultSet.next()) {
+                        result.add(resultSet.getString("tag"));
+                    }
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
         return result;
     }
 
-    public void deletePost(String post_id) {
+    public List<Post> getPosts() {
+        List<Post> posts = new ArrayList<Post>();
         try (Connection conn = dataSource.getConnection()){
-            try (PreparedStatement stmt = conn.prepareStatement("delete from post WHERE id = ?")){
-                stmt.setInt(1, Integer.valueOf(post_id));
-                stmt.executeUpdate();
-                conn.close();
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM post")) {
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    Post post = fetchPost(resultSet);
+                    posts.add(post);
+                }
             }
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return posts;
+
+    }
+
+    private Post fetchPost(ResultSet resultSet) {
+        Post post = new Post();
+        try {
+            post.setId(resultSet.getInt("id"));
+            post.setAccountId(resultSet.getInt("account_id"));
+            post.setImgSrc(resultSet.getString("img_src"));
+            post.setYoutubeLink(resultSet.getString("youtube_link"));
+            post.setTitle(resultSet.getString("title"));
+            post.setDescription(resultSet.getString("description"));
+            post.setPostTime(resultSet.getTimestamp("post_time"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return post;
     }
 }

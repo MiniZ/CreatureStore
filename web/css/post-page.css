@@ -1,22 +1,22 @@
 .post-page{
-	margin-top: 60px;
+    margin-top: 60px;
     margin-left: 15%;
 }
 
 
 .post-photo{
-	border: 20px solid white;
+    border: 20px solid white;
     margin-top: 30px;
 }
 
 .post-photo img{
-	max-width: 400px;
+    max-width: 400px;
     max-height: 300px;
-    display: block;	
+    display: block;
 }
 
- .about-header{
- 	height: 77px;
+.about-header{
+    height: 77px;
     background-color: black;
     width: 100%;
     margin: -8px;
@@ -35,7 +35,7 @@
     border-radius: 50%;
     margin-left: 3%;
     margin-right: 4%;
- 
+    margin-top: 3px;
 }
 
 .bg-avatar{
@@ -43,41 +43,39 @@
 }
 
 .author-name{
-	padding-top: 2px;
+    padding-top: 2px;
 }
 
 .post-title{
-	display: inline;
+    display: inline;
 }
 
-.inline-block{
-	display: inline-block;
-}
+
 
 .right-content{
-	top: 210px;
+    top: 210px;
     position: absolute;
     margin-left: 50px;
     max-width: 30%
 }
 
 .plus-minus-num{
-	margin-right: 16px;
-	display: inline-block;
+    margin-right: 16px;
+    display: inline-block;
 }
 
 .post-description{
-	margin-top: 20px;
-	
+    margin-top: 20px;
+
 }
 
 .post-date{
-	margin-top: 20px;
-	
+    margin-top: 20px;
+
 }
 
 .post-pluses{
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 
@@ -92,12 +90,12 @@
 }*/
 
 .post-tags{
-	margin-top: 20px;
-	
+    margin-top: 20px;
+
 }
 
 .btn{
-	display: inline-block;
+    display: inline-block;
     line-height: 1.4em;
     text-align: center;
     white-space: nowrap;
@@ -105,8 +103,8 @@
 }
 
 .btn-tag{
-	border-radius: 15%;
-	padding: 4px 5px;
+    border-radius: 15%;
+    padding: 4px 5px;
     background: rgb(212, 212, 212);
     margin: 0.3em 0.1em;
 }

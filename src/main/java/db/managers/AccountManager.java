@@ -331,7 +331,7 @@ public class AccountManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new ArrayList<>();
+        return result;
     }
 
     public boolean isUserAdmin(String display_name) {

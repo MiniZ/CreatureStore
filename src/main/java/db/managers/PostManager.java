@@ -137,4 +137,46 @@ public class PostManager {
         }
         return post;
     }
+
+    public List<Post> getAllPosts(String postt) {
+        List<Post> result = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection()) {
+            String query;
+            if (postt != null && !postt.isEmpty()) {
+                query = "SELECT id, title from post where title like ? ORDER BY post_time DESC";
+            } else {
+                query = "SELECT id, title from post ORDER BY post_time DESC";
+            }
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                if (postt != null && !postt.isEmpty()) {
+                    stmt.setString(1, "%" + postt + "%");
+                }
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    Post post = new Post();
+                    post.setId(resultSet.getInt("id"));
+                    post.setTitle(resultSet.getString("title"));
+                    result.add(post);
+                }
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void deletePost(String post_id) {
+        try (Connection conn = dataSource.getConnection()) {
+            try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM post WHERE id = ?")) {
+                stmt.setInt(1, Integer.valueOf(post_id));
+                stmt.executeUpdate();
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

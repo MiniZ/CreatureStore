@@ -51,7 +51,7 @@
         List<String> loggedUserFollowingDisplayNames = new ArrayList<>();
 
         for (int i = 0; i < loggedUserFollowing.size(); i++) {
-            loggedUserFollowingDisplayNames.add(userFollowing.get(i).getDisplayName());
+            loggedUserFollowingDisplayNames.add(loggedUserFollowing.get(i).getDisplayName());
         }
 
 %>

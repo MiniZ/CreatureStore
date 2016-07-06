@@ -64,26 +64,26 @@ public class SignUpServlet extends HttpServlet {
             if (manager.createAccount(account)) {
                 request.getSession()
                         .setAttribute("display_name", account.getDisplayName());
-                //TODO
-                /*RequestDispatcher dispatcher = request
-                        .getRequestDispatcher("setavatar.jsp");
-                dispatcher.forward(request, response);*/
+                request.getSession().setAttribute("is_admin", false);
                 response.sendRedirect("index.jsp");
             } else {
                 request.setAttribute("error", "true");
                 RequestDispatcher dispatcher = request
                         .getRequestDispatcher("signup.jsp");
+                request.getSession().setAttribute("is_admin", false);
                 dispatcher.forward(request, response);
             }
         } else {
             if (socialSign) {
                 HttpSession session = request.getSession();
                 session.setAttribute("display_name", display_name);
+                request.getSession().setAttribute("is_admin", false);
                 response.sendRedirect("index.jsp");
             } else {
                 request.setAttribute("usernameTaken", "true");
                 RequestDispatcher dispatcher = request
                         .getRequestDispatcher("signup.jsp");
+                request.getSession().setAttribute("is_admin", false);
                 dispatcher.forward(request, response);
             }
         }

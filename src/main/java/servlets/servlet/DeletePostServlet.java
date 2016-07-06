@@ -43,7 +43,7 @@ public class DeletePostServlet extends HttpServlet {
         }
         PostManager postManager = (PostManager) getServletContext()
                 .getAttribute(PostManager.ATTRIBUTE_NAME);
-//        postManager.deletePost(post_id);
+        postManager.deletePost(post_id);
         RequestDispatcher dispatcher = request
                 .getRequestDispatcher("admin.jsp?type=post");
         dispatcher.forward(request, response);

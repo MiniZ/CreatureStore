@@ -2,10 +2,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="java.lang.String"%>
 <%@ page import="main.java.db.managers.AccountManager" %>
+<%@ page import="main.java.db.managers.PostManager" %>
 <%@ page import="main.java.models.Post" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.sql.Date" %>
 <%@ page import="java.sql.Timestamp" %>
+<%@ page import="java.util.ArrayList" %>
 <jsp:include page="header.jsp" />
 
 <html>
@@ -28,6 +30,7 @@
         String postID = request.getParameter("postId");
         ServletContext sc = getServletConfig().getServletContext();
         AccountManager manager = (AccountManager) sc.getAttribute(AccountManager.ATTRIBUTE_NAME);
+        PostManager postManager = (PostManager) sc.getAttribute(PostManager.ATTRIBUTE_NAME);
 
         Post post = manager.getPostById(postID);
         String img_src = post.getImgSrc();
@@ -36,9 +39,13 @@
         Integer account_id = post.getAccountId();
         Integer post_id = post.getId();
         Timestamp post_date = post.getPostTime();
+        String date = post_date.toString().split("\\ ")[0];
 
         String display_name = manager.getAccountDisplayNameByID(account_id);
         String user_avatar = manager.getUserAvatarByID(account_id);
+
+        ArrayList<String> tags = postManager.getTagsByPostID(post_id);
+
 
     %>
 </head>
@@ -55,7 +62,7 @@
                     %>
                 </div>
                 <div class="author-avatar left bg-cover pointer">
-                    <img src="GetImage?image=<%=user_avatar%>" >
+                    <img src="GetImage?image=<%=user_avatar%>" class="author-avatar left bg-cover pointer">
                 </div>
 
                 <div class="author-name">by <span class="fc-grey-dark pointer on-hover">
@@ -66,11 +73,7 @@
             </div>
 
             <div class="post-photo">
-                <%
-                    out.print("<img src ='");
-                    out.print(img_src);
-                    out.print("'/>");
-                %>
+                <img src="GetImage?image=<%=img_src%>">
             </div>
 
             <div class="post-comments">
@@ -95,7 +98,7 @@
                 <span class="ff-superSquare fs-13 fc-grey-darker">Date: </span>
 					<span class="ff-superSquare fs-13 fc-grey-dark">
 						  <%
-                              out.print(post_date);
+                              out.print(date);
                           %>
 					</span>
             </div>
@@ -111,30 +114,18 @@
 
             <div class="post-tags">
                 <span class="ff-superSquare fs-13 fc-grey-darker">Tags: </span>
-                <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark">
-                    city
-                </div>
-
-                <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark">
-                    building
-                </div>
-                <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark">
-                    trees
-                </div>
-                <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark">
-                    trees
-                </div>
-                <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark">
-                    trees
-                </div>
-                <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark">
-                    trees
-                </div>
+                <%
+                    for (String tag : tags) {
+                        out.print(" <div class=\"btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark\">");
+                        out.print(tag);
+                        out.print("</div>");
+                    }
+                %>
             </div>
 
         </div>
     </div>
-    
+
 </div>
 
 </body>

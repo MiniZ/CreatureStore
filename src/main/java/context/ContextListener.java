@@ -3,6 +3,7 @@ package main.java.context;
 import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 import main.java.db.DBConfig;
 import main.java.db.managers.AccountManager;
+import main.java.db.managers.CommentsManager;
 import main.java.db.managers.PostManager;
 
 import javax.naming.Context;
@@ -44,6 +45,7 @@ public class ContextListener implements ServletContextListener {
 			arg0.getServletContext().setAttribute("DataSource", dataSource);
 			arg0.getServletContext().setAttribute(AccountManager.ATTRIBUTE_NAME, new AccountManager(dataSource));
 			arg0.getServletContext().setAttribute(PostManager.ATTRIBUTE_NAME, new PostManager(dataSource));
+			arg0.getServletContext().setAttribute(CommentsManager.ATTRIBUTE_NAME, new CommentsManager(dataSource));
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

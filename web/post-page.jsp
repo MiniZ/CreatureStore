@@ -75,10 +75,6 @@
             <div class="post-photo">
                 <img src="GetImage?image=<%=img_src%>">
             </div>
-
-            <div class="post-comments">
-
-            </div>
         </div>
 
 

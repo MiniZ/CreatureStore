@@ -26,6 +26,7 @@
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"#\">Following</a></li>");
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"#\">+ Plus</a></li>");
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"#\">- Minus</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/users.jsp?search=\">Users</a></li>");
                     }
                 %>
 

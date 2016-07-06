@@ -9,6 +9,7 @@
 <head>
     <title>user profile</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/about.css">
     <link rel="stylesheet" type="text/css" href="css/new_profile.css">
     <link rel="stylesheet" type="text/css" href="css/following-users.css">
     <script src="/javascript/profile.js"></script>
@@ -18,6 +19,8 @@
 <%
     ServletContext sc = getServletConfig().getServletContext();
     AccountManager manager = (AccountManager) sc.getAttribute(AccountManager.ATTRIBUTE_NAME);
+
+    String loggedUserDisplayName = (String) session.getAttribute("display_name");
 
     String displayName = null;
     if (request.getParameter("username") != null) {
@@ -35,28 +38,35 @@
         String country = profileAcc.getCountry();
         String aboutMe = profileAcc.getAboutMe();
         String profileImg = profileAcc.getImgSrc();
-        if (profileAcc.getImgSrc() == null) {
-            profileImg = "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg";
+
+
+        if (profileImg == null) {
+            profileImg = "/images/images/nobody_m.original.jpg";
+        } else {
+            profileImg = "GetImage?image=" + profileImg;
         }
+
 
         List<Account> userFollowers = manager.getUserFollowers(displayName);
         List<Account> userFollowing = manager.getUserFollowing(displayName);
-        List<String> userFollowingDisplayNames = new ArrayList<>();
+        List<Account> loggedUserFollowing = manager.getUserFollowing(loggedUserDisplayName);
+        List<String> loggedUserFollowingDisplayNames = new ArrayList<>();
 
-        for (int i = 0; i < userFollowing.size(); i++) {
-            userFollowingDisplayNames.add(userFollowing.get(i).getDisplayName());
+        for (int i = 0; i < loggedUserFollowing.size(); i++) {
+            loggedUserFollowingDisplayNames.add(userFollowing.get(i).getDisplayName());
         }
 
 %>
 
-<div class="follow-posts-header">
-    <div class="followers_menu inline-block">
+<div id="follow-posts-header">
+    <div id="followers_menu" class="inline-block">
         <ul>
-            <li class=" inline-block ff-superSquare fs-15 fc-grey-dark" style="background-color: #90d2de;" onclick="followersClick()">
-                <a id="followers" class=" followers text-deco-none" onclick="followersClick()" href="#">followers</a>
+            <li id="followers" style="background-color: #90d2de;"
+                class="inline-block ff-superSquare fs-15 fc-grey-dark">
+                <a class=" followers text-deco-none" href="#">followers</a>
             </li>
-            <li class="following inline-block ff-superSquare fs-15 fc-grey-dark" onclick="followingClick()">
-                <a id="following" class=" following text-deco-none"  onclick="followingClick()" href="#">following</a>
+            <li id="following" class="following inline-block ff-superSquare fs-15 fc-grey-dark">
+                <a class=" following text-deco-none" href="#">following</a>
             </li>
 
             <li class="uploads inline-block ff-superSquare fs-15 fc-grey-dark">
@@ -70,10 +80,10 @@
 
     <div class="pic_with_menu">
         <div class="profile-picture m-auto bg-cover">
-            <img src="GetImage?image=<%=profileImg%>" class="profile-picture m-auto bg-cover">
+            <img src="<%=profileImg%>" class="profile-picture m-auto bg-cover">
         </div>
+        <% if (loggedUserDisplayName.equals(displayName)) {%>
         <div class="upload-avatar m-auto">
-
             <form action="ImageUploadServlet" method="post"
                   enctype="multipart/form-data">
                 <input class="input-btn pointer ff-superSquare fs-13 fc-grey-dark" type="file" name="file"
@@ -82,6 +92,8 @@
                        value="Upload File"/>
             </form>
         </div>
+        <%}%>
+
     </div>
 
     <div class="profile-info m-auto ff-superSquare fs-13 fc-grey-dark">
@@ -109,18 +121,31 @@
             %>
             </label>
         </div>
-        <div class="facebook-link">
-            <label><%=facebook%>
-            </label>
+        <%--<div class="facebook-link">--%>
+        <%--<label><%=facebook%>--%>
+        <%--</label>--%>
+        <%--</div>--%>
+        <%--<div class="twitter-link">--%>
+        <%--<label><%=twitter%>--%>
+        <%--</label>--%>
+        <%--</div>--%>
+        <%--<div class="google-link">--%>
+        <%--<label><%=googlePlus%>--%>
+        <%--</label>--%>
+        <%--</div>--%>
+
+        <div class="profile-icons">
+            <a href="<%=facebook%>" class="about-fb-icon inline-hor">
+                <img src="images/images/fb.png">
+            </a>
+            <a href="<%=twitter%>" class="about-git-icon inline-hor">
+                <img src="images/images/twitter.png">
+            </a>
+            <a href="<%=googlePlus%>" class="about-google-icon inline-hor">
+                <img src="images/images/google.png">
+            </a>
         </div>
-        <div class="twitter-link">
-            <label><%=twitter%>
-            </label>
-        </div>
-        <div class="google-link">
-            <label><<%=googlePlus%>
-            </label>
-        </div>
+
     </div>
 
     <div class="profile-about m-auto ff-superSquare fs-15 fc-grey-darker">
@@ -129,62 +154,111 @@
     </div>
 
 </div>
-
-<%for (int i = 0; i < userFollowers.size(); i++) {%>
 <div id="user-followers-dashboard" class="user-followers-dashboard">
+    <%for (int i = 0; i < userFollowers.size(); i++) {%>
     <div class="single-user-info">
         <div class="single-user-picture">
-
+            <%
+                String imgSrc = userFollowers.get(i).getImgSrc();
+                if (imgSrc == null) {
+                    imgSrc = "/images/images/nobody_m.original.jpg";
+                } else {
+                    imgSrc = "GetImage?image=" + imgSrc;
+                }
+            %>
+            <img src="<%=imgSrc%>" class="follow-picture m-auto bg-cover">
         </div>
         <div class="single-user-name-email">
-            <div class="single-user-name">
+            <a href="http://localhost:8080/profile.jsp?username=<%=userFollowers.get(i).getDisplayName()%>"
+               class="single-user-name">
                 <%=userFollowers.get(i).getDisplayName()%>
-            </div>
+            </a>
             <div class="single-user-email">
                 <%=userFollowers.get(i).getMail()%>
             </div>
         </div>
         <div class="single-user-buttons">
-            <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark follow-unfollow-button">
-                <% if (userFollowingDisplayNames.contains(userFollowers.get(i).getDisplayName())) {
-                    out.print("unfollow");
-                }else{
-                    out.print("follow");
-                }
-                %>
-            </div>
+            <% if (loggedUserFollowingDisplayNames.contains(userFollowers.get(i).getDisplayName()) && !loggedUserDisplayName.equals(userFollowers.get(i).getDisplayName())) {%>
+            <form action="FollowUnfollowServlet" method="post"
+                  role="form">
+                <input type="hidden" value='unfollow' name="type">
+                <input type="hidden" value='profile.jsp?username=<%=displayName%>' name="page">
+                <input type="hidden" value='<%=userFollowers.get(i).getDisplayName()%>' name="user">
+                <button class="unfollow btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark follow-unfollow-button">
+                    unfollow
+                </button>
+            </form>
+
+            <%} else if(!loggedUserDisplayName.equals(userFollowers.get(i).getDisplayName())){%>
+
+            <form action="FollowUnfollowServlet" method="post"
+                  role="form">
+                <input type="hidden" value='follow' name="type">
+                <input type="hidden" value='profile.jsp?username=<%=displayName%>' name="page">
+                <input type="hidden" value='<%=userFollowers.get(i).getDisplayName()%>' name="user">
+                <button class="unfollow btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark follow-unfollow-button">
+                    follow
+                </button>
+            </form>
+            <%}%>
         </div>
     </div>
+    <%
+        }
+    %>
 </div>
-<%
-    }
-%>
-
-<%for (int i = 0; i < userFollowing.size(); i++) {%>
-<div id="user-following-dashboard" class="user-following-dashboard">
+<div id="user-following-dashboard" class="user-followers-dashboard">
+    <%for (int i = 0; i < userFollowing.size(); i++) {%>
     <div class="single-user-info">
         <div class="single-user-picture">
-
+            <%
+                String imgSrc = userFollowing.get(i).getImgSrc();
+                if (imgSrc == null) {
+                    imgSrc = "/images/images/nobody_m.original.jpg";
+                } else {
+                    imgSrc = "GetImage?image=" + imgSrc;
+                }
+            %>
+            <img src="<%=imgSrc%>" class="follow-picture m-auto bg-cover">
         </div>
         <div class="single-user-name-email">
-            <div class="single-user-name">
+            <a href="http://localhost:8080/profile.jsp?username=<%=userFollowing.get(i).getDisplayName()%>"
+               class="single-user-name">
                 <%=userFollowing.get(i).getDisplayName()%>
-            </div>
+            </a>
             <div class="single-user-email">
                 <%=userFollowing.get(i).getMail()%>
             </div>
         </div>
         <div class="single-user-buttons">
-            <div class="btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark follow-unfollow-button">
-                unfollow
-            </div>
+            <% if (loggedUserFollowingDisplayNames.contains(userFollowing.get(i).getDisplayName())  && !loggedUserDisplayName.equals(userFollowing.get(i).getDisplayName())) {%>
+            <form action="FollowUnfollowServlet" method="post"
+                  role="form">
+                <input type="hidden" value='unfollow' name="type">
+                <input type="hidden" value='profile.jsp?username=<%=displayName%>' name="page">
+                <input type="hidden" value='<%=userFollowing.get(i).getDisplayName()%>' name="user">
+                <button class="unfollow btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark follow-unfollow-button">
+                    unfollow
+                </button>
+            </form>
+
+            <%} else if (!loggedUserDisplayName.equals(userFollowing.get(i).getDisplayName())){%>
+            <form action="FollowUnfollowServlet" method="post"
+                  role="form">
+                <input type="hidden" value='follow' name="type">
+                <input type="hidden" value='profile.jsp?username=<%=displayName%>' name="page">
+                <input type="hidden" value='<%=userFollowing.get(i).getDisplayName()%>' name="user">
+                <button class="unfollow btn btn-tag post-tag ff-superSquare fs-13 fc-grey-dark follow-unfollow-button">
+                    follow
+                </button>
+            </form>
+            <%}%>
         </div>
     </div>
+    <%
+        }
+    %>
 </div>
-<%
-    }
-%>
-
 <%
 
     }

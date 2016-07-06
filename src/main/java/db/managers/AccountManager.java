@@ -41,6 +41,32 @@ public class AccountManager {
         return result;
     }
 
+    public List<Account> getAllAccounts(String displayName) {
+        List<Account> result = new ArrayList<>();
+        try {
+            Connection con = dataSource.getConnection();
+            String query = "";
+            if (displayName == null || displayName.length() == 0){
+                query = "SELECT * FROM accounts ORDER BY display_name ASC";
+            } else {
+                query = "SELECT * FROM accounts WHERE display_name LIKE ? ORDER BY display_name ASC";
+            }
+
+            PreparedStatement stmt = con.prepareStatement(query);
+            if (displayName != null && displayName.length() != 0) {
+                stmt.setString(1, "%"+displayName+"%");
+            }
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                result.add(fetchAccount(resultSet));
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public boolean userExists(String display_name) {
         try {
             Connection con = dataSource.getConnection();
@@ -274,8 +300,8 @@ public class AccountManager {
                             result.add(follower);
                         }
                     }
-                    conn.close();
                 }
+                conn.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -298,8 +324,8 @@ public class AccountManager {
                             result.add(fetchAccount(resultSet2));
                         }
                     }
-                    conn.close();
                 }
+                conn.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -41,34 +41,35 @@ public class FollowUnfollowServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
         String logged_in_user_display_name = (String) request.getSession().getAttribute("display_name");
-        String chosen_user_display_name = request.getParameter("chosen_user_display_name");
-        String isFollow = request.getParameter("isFollow");
+        String chosen_user_display_name = request.getParameter("user");
+        String type = request.getParameter("type");
+        String page = request.getParameter("page");
         if (logged_in_user_display_name == null) {
             response.sendRedirect("index.jsp");
             return;
         }
         AccountManager manager = (AccountManager) getServletContext()
                 .getAttribute(AccountManager.ATTRIBUTE_NAME);
-        switch (isFollow) {
+        switch (type) {
             case "follow" :
                 if (manager.followUser(logged_in_user_display_name, chosen_user_display_name)) {
                     RequestDispatcher dispatcher = request
-                            .getRequestDispatcher("profile.jsp?username=" + logged_in_user_display_name);
+                            .getRequestDispatcher(page);
                     dispatcher.forward(request, response);
                 } else {
                     RequestDispatcher dispatcher = request
-                            .getRequestDispatcher("profile.jsp?username=" + logged_in_user_display_name);
+                            .getRequestDispatcher(page);
                     dispatcher.forward(request, response);
                 }
                 break;
             case "unfollow" :
                 if (manager.unFollowUser(logged_in_user_display_name, chosen_user_display_name)) {
                     RequestDispatcher dispatcher = request
-                            .getRequestDispatcher("profile.jsp?username=" + logged_in_user_display_name);
+                            .getRequestDispatcher(page);
                     dispatcher.forward(request, response);
                 } else {
                     RequestDispatcher dispatcher = request
-                            .getRequestDispatcher("profile.jsp?username=" + logged_in_user_display_name);
+                            .getRequestDispatcher(page);
                     dispatcher.forward(request, response);
                 }
                 break;

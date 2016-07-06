@@ -7,7 +7,7 @@
     padding-right: 16px;
 }
 
-.follow-posts-header{
+#follow-posts-header{
 	height: 55px;
     background-color: rgb(240,240,240);
     width: 100%;
@@ -16,7 +16,7 @@
     padding-right: 16px;
 	position: absolute;
 	top: 62px;
-	z-index: -1;
+	z-index: 200000;
 }
 
 .text-deco-none{
@@ -31,12 +31,12 @@
 
 .profile{
 	max-width: 60%;
-	margin-top: 30px;
+	margin-top: 70px;
 }
 
 .profile-picture{
-	width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
 }
 
@@ -69,19 +69,26 @@
 	padding-left: 25px;
 }
 
+#followers_menu ul li a:hover{
+	cursor: pointer;
+	color: #5CCA63; !important;
+}
+
+
 .followers :hover{
 	cursor: pointer;
 	opacity: 0.8;
 }
 
 .following {
-	padding-left: 25px;
+	padding-left: 10px;
 }
 
 .following:hover {
 	cursor: pointer;
 	opacity: 0.8;
 }
+
 .uploads {
 	padding-left: 25px;
 }
@@ -95,4 +102,25 @@
 .followers:hover {
 	cursor: pointer;
 	opacity: 0.8;
+}
+
+.follow-picture {
+    width: 100%;
+}
+
+.user-followers-dashboard {
+    margin-left: auto;
+    width: 90%;
+    white-space: normal;
+    margin-right: auto;
+}
+
+.profile-icons {
+    margin-top: 20px;
+}
+
+.single-user-name {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
 }

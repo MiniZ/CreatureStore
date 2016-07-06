@@ -341,4 +341,24 @@ public class PostManager {
         }
         return 0;
     }
+
+    public List<Post> getPostsForUser(String loggedUserDisplayName) {
+        AccountManager manager = new AccountManager(dataSource);
+        Account logged = manager.getAccount(loggedUserDisplayName);
+        List<Post> posts = new ArrayList<Post>();
+        try (Connection conn = dataSource.getConnection()){
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM post where account_id = ? ORDER BY post_time DESC ")) {
+                stmt.setInt(1, (int) logged.getId());
+                ResultSet resultSet = stmt.executeQuery();
+                while (resultSet.next()) {
+                    Post post = fetchPost(resultSet);
+                    posts.add(post);
+                }
+            }
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return posts;
+    }
 }

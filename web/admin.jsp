@@ -62,9 +62,12 @@
         %>
             <div class=heading>
                 <%
-
                     out.print("<h2 class=\"form-signin-heading text-center\"><span class=\"label-success ff-superSquareCap fc-grey fs-30\">Manage Users</span></h2>");
+                    out.print("<input type=\"text\" class=\"form-control user-search\">\n" +
+                            "                </input>");
+                    out.print("<button class=\"form-control form-signin-button ff-superSquareCap fs-18 user-search-button\" >Search</button>\n");
                 %>
+
             </div>
             <%
                 for (String s : users.keySet()) {
@@ -124,6 +127,9 @@
             <div class=heading>
                 <%
                     out.print("<h2 class=\"form-signin-heading text-center\"><span class=\"label-success ff-superSquareCap fc-grey fs-30\">Manage Posts</span></h2>");
+                    out.print("<input type=\"text\" class=\"form-control post-search\">\n" +
+                            "                </input>");
+                    out.print("<button class=\"form-control form-signin-button ff-superSquareCap fs-18 post-search-button\" >Search</button>\n");
                 %>
             </div>
             <%

@@ -37,7 +37,7 @@
                 <%
                     if (loggedInUser != null) {
                         if (is_admin != null && is_admin) {
-                            out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/admin.jsp\" class=\"admin-li\">" + "Admin Panel" + "</a></li>");
+                            out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/admin.jsp?user=&post=\" class=\"admin-li\">" + "Admin Panel" + "</a></li>");
                             out.print("<li>");
                         }
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"http://localhost:8080/postupload.jsp\" class=\"post-upload-li\">" + "Upload Post"+ "</a></li>");

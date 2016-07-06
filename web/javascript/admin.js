@@ -25,4 +25,5 @@ $( document ).ready(function() {
         users_board.setAttribute("style", "display: none");
         posts_board.setAttribute("style", "display: block");
     });
+
 });

@@ -136,7 +136,7 @@ public class PostUploadServlet extends StorageServlet {
                 if (postId != 0) {
                     //refresh user page
                     RequestDispatcher dispatcher = request
-                            .getRequestDispatcher("post-jsp.jsp?postId=" + display_name);
+                            .getRequestDispatcher("post-page.jsp?postId=" + postId);
                     dispatcher.forward(request, response);
                 } else {
                     request.setAttribute("tryAgain", "true");

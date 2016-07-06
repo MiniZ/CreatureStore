@@ -33,6 +33,7 @@ $( document ).ready(function() {
 
     $('.post-search-button').click(function () {
         var inp = $('.post-search').val();
+        $('.post-search').clear
         window.location.href = 'http://localhost:8080/admin.jsp?user=&type=post&post=' + inp;
     });
 

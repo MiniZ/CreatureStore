@@ -46,7 +46,7 @@ public class BanUserServlet extends HttpServlet {
                 .getAttribute(AccountManager.ATTRIBUTE_NAME);
         manager.banUser(display_name);
         RequestDispatcher dispatcher = request
-                .getRequestDispatcher("admin.jsp");
+                .getRequestDispatcher("admin.jsp?user=&post=");
         dispatcher.forward(request, response);
     }
 

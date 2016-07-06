@@ -24,7 +24,7 @@
                 <%
                     if (loggedInUser != null) {
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"/following-posts.jsp\">Following</a></li>");
-                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"#\">+ Plus</a></li>");
+                        out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"myplusposts.jsp\">+ Plus</a></li>");
                         out.print("<li class=\"ff-superSquareCap fc-grey fs-13\"><a href=\"/users.jsp?search=\">Users</a></li>");
                     }
                 %>

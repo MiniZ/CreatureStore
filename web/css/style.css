@@ -161,8 +161,7 @@
     height: 16px;
   background-image: url("../images/images/minus.png");
     margin-right: 6px;
-    -webkit-filter: grayscale(100%);
-    opacity: 0.5;
+    opacity: 1;
 }
 
 .bg-plus-icon{
@@ -170,17 +169,14 @@
     height: 16px;
      background-image: url("../images/images/plus.png");
     margin-right: 15px;
-    -webkit-filter: grayscale(100%);
-    opacity: 0.5;
+    opacity: 1;
 }
 
 
 .on-hover:hover{
-    opacity: 1;
-    -webkit-filter: grayscale(0%);
+    opacity: 0.8;
     
 }
-
 
 .bg-cover{
     background-size: cover;

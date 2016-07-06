@@ -70,12 +70,11 @@ public class PostManager {
         ArrayList<String> result = new ArrayList<String>();
         ArrayList<Integer> tagIDs = new ArrayList<Integer>();
 
-
         try (Connection conn = dataSource.getConnection()) {
             try (PreparedStatement stmt = conn.prepareStatement("SELECT tag_id from post_tag where post_id = ?")) {
                 stmt.setInt(1, post_id);
                 ResultSet resultSet = stmt.executeQuery();
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     tagIDs.add(resultSet.getInt("tag_id"));
                 }
                 conn.close();
@@ -91,7 +90,7 @@ public class PostManager {
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT tag from tag where id = ?")) {
                     stmt.setInt(1, tagID);
                     ResultSet resultSet = stmt.executeQuery();
-                    if (resultSet.next()) {
+                    while (resultSet.next()) {
                         result.add(resultSet.getString("tag"));
                     }
                     conn.close();
@@ -110,7 +109,7 @@ public class PostManager {
     public List<Post> getPosts() {
         List<Post> posts = new ArrayList<Post>();
         try (Connection conn = dataSource.getConnection()){
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM post")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM post ORDER BY post_time DESC ")) {
                 ResultSet resultSet = stmt.executeQuery();
                 while (resultSet.next()) {
                     Post post = fetchPost(resultSet);
@@ -250,6 +249,7 @@ public class PostManager {
 
     public List<Post> getUserPlusesPost(String user_display_name) {
         List<Post> result = new ArrayList<>();
+        List<Integer> ids = new ArrayList<>();
         AccountManager accountManager = new AccountManager(dataSource);
         try (Connection conn = dataSource.getConnection()) {
             try (PreparedStatement stmt = conn.prepareStatement("SELECT post_id FROM plus WHERE account_id = ?")) {
@@ -260,8 +260,11 @@ public class PostManager {
                     try (PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM post WHERE id = ?")) {
                         stmt2.setInt(1, Integer.valueOf(String.valueOf(resultSet.getString("post_id"))));
                         ResultSet resultSet2 = stmt2.executeQuery();
-                        while (resultSet2.next()) {
-                            result.add(fetchPost(resultSet2));
+                        if (resultSet2.next()) {
+                            if (!ids.contains(Integer.valueOf(String.valueOf(resultSet.getString("post_id"))))) {
+                                result.add(fetchPost(resultSet2));
+                                ids.add(Integer.valueOf(String.valueOf(resultSet.getString("post_id"))));
+                            }
                         }
                     }
                 }

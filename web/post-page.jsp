@@ -91,8 +91,14 @@
                 <form action="PlusPostServlet" method="post"
                       role="form">
                     <input type="hidden" value='<%=post.getId()%>' name="post_id">
-                    <button class="plus-minus-num bg-plus-icon bg-cover  pointer on-hover" type="submit"></button>
-                    <span class="ff-superSquare fc-grey-dark"><%=pluses%></span>
+                    <span class="ff-superSquare fc-grey-dark">Pluses : <%=pluses%></span>
+                    <%
+                        if (loggedInUser != null) {
+                    %>
+                    <button style="margin-left: 10px;" class="plus-minus-num bg-plus-icon bg-cover  pointer on-hover" type="submit"></button>
+                    <%
+                        }
+                    %>
                 </form>
             </div>
 
@@ -100,8 +106,14 @@
                 <form action="MinusPostServlet" method="post"
                       role="form">
                     <input type="hidden" value='<%=post.getId()%>' name="post_id">
-                    <button class="plus-minus-num bg-minus-icon bg-cover  pointer on-hover" type="submit"></button>
-                    <span class="ff-superSquare fc-grey-dark"><%=minuses%></span>
+                    <span class="ff-superSquare fc-grey-dark">Minuses : <%=minuses%></span>
+                    <%
+                        if (loggedInUser != null) {
+                    %>
+                    <button style="margin-left: 10px;" class="plus-minus-num bg-minus-icon bg-cover  pointer on-hover" type="submit"></button>
+                    <%
+                        }
+                    %>
                 </form>
             </div>
 
